@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->uuid('event_id');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->string('name', 128)->unique();
+            $table->text('description');
             $table->integer('total');
             $table->integer('price');
             $table->timestamps();

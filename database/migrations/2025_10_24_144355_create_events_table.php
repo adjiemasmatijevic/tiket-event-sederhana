@@ -9,7 +9,10 @@ return new class extends Migration {
     {
         Schema::create('events', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('image', 32)->unique();
             $table->string('name', 64)->unique();
+            $table->string('slug', 128)->unique();
+            $table->text('description');
             $table->dateTime('time_start');
             $table->dateTime('time_end');
             $table->timestamps();

@@ -10,7 +10,7 @@ class Ticket extends Model
     use HasUuids;
 
     protected $table = 'tickets';
-    protected $fillable = ['event_id', 'name', 'total', 'price'];
+    protected $fillable = ['event_id', 'name', 'description', 'total', 'price'];
 
     public function event()
     {
