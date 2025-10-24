@@ -11,7 +11,7 @@ class User extends Authenticatable
     use HasFactory, HasUuids;
 
     protected $table = 'users';
-    protected $fillable = ['email', 'password', 'name', 'phone', 'role'];
+    protected $fillable = ['email', 'password', 'name', 'phone', 'role', 'profile_picture'];
 
     public function resetPasswords()
     {
