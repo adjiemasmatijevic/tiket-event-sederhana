@@ -12,7 +12,9 @@ return new class extends Migration {
             $table->string('email', 255)->unique();
             $table->char('password', 60);
             $table->string('name', 64)->unique();
+            $table->enum('gender', ['male', 'female']);
             $table->string('phone', 20)->unique();
+            $table->text('address');
             $table->enum('role', ['user', 'checker', 'admin'])->default('user');
             $table->string('profile_picture', 32)->unique()->nullable();
             $table->timestamps();
