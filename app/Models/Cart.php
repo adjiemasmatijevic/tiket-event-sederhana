@@ -10,7 +10,7 @@ class Cart extends Model
     use HasUuids;
 
     protected $table = 'carts';
-    protected $fillable = ['user_id', 'ticket_id', 'transaction_id', 'ticket_no', 'status'];
+    protected $fillable = ['user_id', 'ticket_id', 'ticket_no', 'presence', 'transaction_id', 'status'];
 
     public function user()
     {
