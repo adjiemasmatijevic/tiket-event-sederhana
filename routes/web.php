@@ -7,6 +7,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TicketController;
 
 // fallback route
 Route::fallback(function () {
@@ -48,4 +49,11 @@ Route::middleware(['role:admin'])->group(function () {
     Route::post('/events/create', [EventController::class, 'events_create'])->name('events.create');
     Route::post('/events/update', [EventController::class, 'events_update'])->name('events.update');
     Route::post('/events/delete', [EventController::class, 'events_delete'])->name('events.delete');
+
+    Route::get('/tickets', [TicketController::class, 'tickets'])->name('tickets');
+    Route::get('/tickets/data', [TicketController::class, 'tickets_data'])->name('tickets.data');
+    Route::get('/tickets/data/{id}', [TicketController::class, 'tickets_data_id'])->name('tickets.data.id');
+    Route::post('/tickets/create', [TicketController::class, 'tickets_create'])->name('tickets.create');
+    Route::post('/tickets/update', [TicketController::class, 'tickets_update'])->name('tickets.update');
+    Route::post('/tickets/delete', [TicketController::class, 'tickets_delete'])->name('tickets.delete');
 });
