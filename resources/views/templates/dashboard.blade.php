@@ -146,6 +146,17 @@
                     </li>
                 </ul>
                 @endif
+
+                @if(Auth::user()->role === 'checker')
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
+                        <a class="nav-link d-flex align-items-center {{ Route::currentRouteName() == 'gate-check' ? 'bg-primary rounded text-white font-weight-bold' : '' }}" href="{{ route('gate-check') }}">
+                            <i class="fe fe-check-circle fe-16"></i>
+                            <span class="ml-3 item-text">Gate Check</span>
+                        </a>
+                    </li>
+                </ul>
+                @endif
             </nav>
         </aside>
         <main role="main" class="main-content">

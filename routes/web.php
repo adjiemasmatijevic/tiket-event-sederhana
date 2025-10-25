@@ -9,6 +9,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CheckerController;
 
 // fallback route
 Route::fallback(function () {
@@ -61,4 +62,10 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/users-management', [UserController::class, 'users'])->name('users.management');
     Route::get('/users-management/data', [UserController::class, 'users_data'])->name('users.management.data');
     Route::post('/users-management/update-role', [UserController::class, 'users_update_role'])->name('users.management.update.role');
+});
+
+// only for checker
+Route::middleware(['role:checker'])->group(function () {
+    Route::get('/gate-check', [CheckerController::class, 'showGateCheck'])->name('gate-check');
+    Route::post('/gate-check/scan', [CheckerController::class, 'processScan'])->name('gate-check.scan');
 });
