@@ -29,11 +29,9 @@ class EventController extends Controller
             'time_start',
             'time_end',
             'status',
-            'created_at',
         ])
             ->orderBy('time_start', 'DESC')
-            ->orderBy('time_end', 'DESC')
-            ->orderBy('created_at', 'DESC');
+            ->orderBy('time_end', 'DESC');
 
         return DataTables::of($query)
             ->addIndexColumn()
