@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\Event;
+use App\Models\Ticket;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -19,7 +22,26 @@ class DashboardController extends Controller
 
     private function admin()
     {
-        return view('admins.Dashboard');
+        $totalEvents = Event::count();
+        $activeEvents = Event::where('status', 'active')->count();
+        $totalTickets = Ticket::sum('total');
+
+        $ticketsSold = 0;
+        $totalRevenue = 0;
+
+        $totalUsers = User::where('role', 'user')->count();
+        $totalCheckers = User::where('role', 'checker')->count();
+
+
+        return view('admins.Dashboard', compact(
+            'totalEvents',
+            'activeEvents',
+            'totalTickets',
+            'ticketsSold',
+            'totalUsers',
+            'totalCheckers',
+            'totalRevenue'
+        ));
     }
 
     private function checker()
