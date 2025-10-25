@@ -77,10 +77,10 @@ class UserController extends Controller
             $user->role = $request->role;
             $user->save();
         } catch (Exception $e) {
-            Log::error('Gagal memperbarui role user: ' . $e->getMessage());
-            return back()->with('error', 'Gagal memperbarui role user');
+            Log::error('Failed to update user role: ' . $e->getMessage());
+            return back()->with('error', 'Failed to update user role');
         }
 
-        return back()->with('success', 'Role user berhasil diperbarui');
+        return back()->with('success', 'User role updated successfully');
     }
 }

@@ -87,11 +87,11 @@ class TicketController extends Controller
                 'price' => $request->price,
             ]);
         } catch (Exception $e) {
-            Log::error('Gagal membuat tiket: ' . $e->getMessage());
-            return back()->with('error', 'Gagal membuat tiket')->withInput();
+            Log::error('Failed to create ticket: ' . $e->getMessage());
+            return back()->with('error', 'Failed to create ticket')->withInput();
         }
 
-        return back()->with('success', 'Tiket berhasil dibuat');
+        return back()->with('success', 'Ticket created successfully');
     }
 
     public function tickets_update(Request $request)
@@ -120,11 +120,11 @@ class TicketController extends Controller
             $ticket->price = $request->price;
             $ticket->save();
         } catch (Exception $e) {
-            Log::error('Gagal memperbarui tiket: ' . $e->getMessage());
-            return back()->with('error', 'Gagal memperbarui tiket')->withInput();
+            Log::error('Failed to update ticket: ' . $e->getMessage());
+            return back()->with('error', 'Failed to update ticket');
         }
 
-        return back()->with('success', 'Tiket berhasil diperbarui');
+        return back()->with('success', 'Ticket updated successfully');
     }
 
     public function tickets_delete(Request $request)
@@ -143,10 +143,10 @@ class TicketController extends Controller
             $ticket = Ticket::findOrFail($request->id);
             $ticket->delete();
         } catch (Exception $e) {
-            Log::error('Gagal menghapus tiket: ' . $e->getMessage());
-            return back()->with('error', 'Gagal menghapus tiket');
+            Log::error('Failed to delete ticket: ' . $e->getMessage());
+            return back()->with('error', 'Failed to delete ticket');
         }
 
-        return back()->with('success', 'Tiket berhasil dihapus');
+        return back()->with('success', 'Ticket deleted successfully');
     }
 }
