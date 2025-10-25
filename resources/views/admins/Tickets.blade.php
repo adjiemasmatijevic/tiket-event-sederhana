@@ -166,10 +166,9 @@
         </div>
     </div>
 </div>
+
 <script>
-    // Inisialisasi CKEditor untuk textarea description (baru & edit)
     CKEDITOR.replace('description', {
-        /* Konfigurasi toolbar sama seperti Event */
         toolbar: [{
             name: 'basicstyles',
             items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']
@@ -182,7 +181,6 @@
         height: 150
     });
     CKEDITOR.replace('edit_description', {
-        /* Konfigurasi toolbar sama seperti Event */
         toolbar: [{
             name: 'basicstyles',
             items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']
@@ -196,14 +194,12 @@
     });
 
     $(function() {
-        // Inisialisasi DataTables
-        $('#ticket-table').DataTable({ // Ubah ID tabel
+        $('#ticket-table').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
-            ajax: "{{ route('tickets.data') }}", // Ubah route data
-            columns: [ // Sesuaikan definisi kolom
-                {
+            ajax: "{{ route('tickets.data') }}",
+            columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
                     orderable: false,
@@ -212,11 +208,11 @@
                 {
                     data: 'event_name',
                     name: 'events.name'
-                }, // Kolom nama event
+                },
                 {
                     data: 'name',
                     name: 'tickets.name'
-                }, // Kolom nama tiket
+                },
                 {
                     data: 'total',
                     name: 'total'
@@ -224,7 +220,7 @@
                 {
                     data: 'price',
                     name: 'price',
-                    render: function(data, type, row) { // Format harga
+                    render: function(data, type, row) {
                         return 'IDR ' + parseInt(data).toLocaleString('id-ID');
                     }
                 },
@@ -238,41 +234,37 @@
                     data: 'id',
                     visible: false,
                     searchable: false
-                } // Sembunyikan ID
+                }
             ]
         });
     });
 
-    // Event handler saat tombol edit diklik
     $(document).on('click', '[data-target="#EditModal"]', function() {
         let id = $(this).data('id');
 
-        $('#EditModal form').hide(); // Sembunyikan form dulu
-        $('#EditModal .loading-spinner').show(); // Tampilkan spinner
+        $('#EditModal form').hide();
+        $('#EditModal .loading-spinner').show();
         $('#EditModal').modal('show');
 
-        // Ambil data tiket via AJAX
         $.get("{!! route('tickets.data.id', ':id') !!}".replace(':id', id), function(data) {
-            // Isi form edit dengan data yang diterima
             $('#edit_id').val(data.id);
-            $('#edit_event_id').val(data.event_id); // Set event ID
+            $('#edit_event_id').val(data.event_id);
             $('#edit_name').val(data.name);
-            CKEDITOR.instances.edit_description.setData(data.description); // Set data CKEditor
+            CKEDITOR.instances.edit_description.setData(data.description);
             $('#edit_total').val(data.total);
             $('#edit_price').val(data.price);
 
-            $('#EditModal .loading-spinner').hide(); // Sembunyikan spinner
-            $('#EditModal form').fadeIn(); // Tampilkan form
-        }).fail(function() { // Handle jika gagal mengambil data
+            $('#EditModal .loading-spinner').hide();
+            $('#EditModal form').fadeIn();
+        }).fail(function() {
             alert("Gagal mengambil data tiket.");
             $('#EditModal').modal('hide');
         });
     });
 
-    // Event handler saat tombol delete diklik
     $(document).on('click', '[data-target="#DeleteModal"]', function() {
         let id = $(this).data('id');
-        $('#delete_id').val(id); // Set ID di form delete
+        $('#delete_id').val(id);
     });
 </script>
 @endsection
