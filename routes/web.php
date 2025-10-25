@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserController;
 
 // fallback route
 Route::fallback(function () {
@@ -56,4 +57,8 @@ Route::middleware(['role:admin'])->group(function () {
     Route::post('/tickets/create', [TicketController::class, 'tickets_create'])->name('tickets.create');
     Route::post('/tickets/update', [TicketController::class, 'tickets_update'])->name('tickets.update');
     Route::post('/tickets/delete', [TicketController::class, 'tickets_delete'])->name('tickets.delete');
+
+    Route::get('/users-management', [UserController::class, 'users'])->name('users.management');
+    Route::get('/users-management/data', [UserController::class, 'users_data'])->name('users.management.data');
+    Route::post('/users-management/update-role', [UserController::class, 'users_update_role'])->name('users.management.update.role');
 });
