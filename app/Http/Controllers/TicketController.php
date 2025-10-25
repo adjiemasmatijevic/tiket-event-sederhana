@@ -26,9 +26,13 @@ class TicketController extends Controller
             'tickets.name',
             'tickets.total',
             'tickets.price',
-            'tickets.created_at'
+            'tickets.created_at',
+            'events.time_start',
+            'events.time_end',
         ])
             ->join('events', 'tickets.event_id', '=', 'events.id')
+            ->orderBy('events.time_start', 'DESC')
+            ->orderBy('events.time_end', 'DESC')
             ->orderBy('tickets.created_at', 'DESC');
 
         return DataTables::of($query)
