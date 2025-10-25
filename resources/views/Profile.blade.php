@@ -1,5 +1,6 @@
-@extends('layouts.dashboard_template')
+@extends('templates.dashboard')
 
+@section('app_name', config('app.name'))
 @section('title', 'Profile')
 
 @section('content')
@@ -56,7 +57,7 @@
     </style>
 
     <div class="profile-container" onclick="document.getElementById('photoInput').click();">
-        <img src="/storage/profile_pictures/{{ $user->profile_picture }}.webp" alt="Profile Photo" loading="lazy">
+        <img src="{{ $user->profile_picture ? '/storage/profile_pictures/' . $user->profile_picture . '.webp' : '/assets/avatars/default.webp' }}" alt="Profile Photo" loading="lazy">
         <div class="profile-overlay">Change</div>
     </div>
 
@@ -67,11 +68,6 @@
 
     <!-- Info kategori -->
     <p class="h2 mt-4 mb-2 font-weight-bold text-dark text-uppercase">{{ $user->role }}</p>
-    @if ($user->role == 'premium')
-    <p class="text-dark">
-        expires on: {{ \Carbon\Carbon::parse($user->premium_expired_date)->format('d/m/Y') }}
-    </p>
-    @endif
 </div>
 
 <form method="POST" action="{{ route('update.profile') }}" class="text-dark">
@@ -94,12 +90,7 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="phone">Phone</label>
-            <div class="input-group">
-                <select class="form-control" name="phone_code" id="phone_code" style="max-width: 100px;">
-                    <option value="62" selected>+62</option>
-                </select>
-                <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Your phone number" value="{{ $user->phone_number }}" required>
-            </div>
+            <input type="text" name="phone" id="phone" class="form-control" placeholder="Your phone number" value="{{ $user->phone }}" required>
         </div>
         <div class="form-group col-md-6">
             <label for="email">Email</label>
@@ -128,14 +119,14 @@
             </div>
             <div class="form-group position-relative">
                 <label for="NewPassword">New Password</label>
-                <input type="password" class="form-control" name="NewPassword" id="NewPassword" placeholder="Your new password" required>
+                <input type="password" class="form-control" name="NewPassword" id="NewPassword" placeholder="Your new password" required value="{{ old('NewPassword') }}">
                 <span class="toggle-password" toggle="#NewPassword" style="position:absolute; right:15px; top:38px; cursor:pointer;">
                     <i class="fa fa-eye"></i>
                 </span>
             </div>
             <div class="form-group position-relative">
                 <label for="ConfirmPassword">Confirm Password</label>
-                <input type="password" class="form-control" name="ConfirmPassword" id="ConfirmPassword" placeholder="Confirm your new password" required>
+                <input type="password" class="form-control" name="ConfirmPassword" id="ConfirmPassword" placeholder="Confirm your new password" required value="{{ old('ConfirmPassword') }}">
                 <span class="toggle-password" toggle="#ConfirmPassword" style="position:absolute; right:15px; top:38px; cursor:pointer;">
                     <i class="fa fa-eye"></i>
                 </span>

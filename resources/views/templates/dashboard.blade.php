@@ -28,6 +28,39 @@
             display: none !important;
         }
     </style>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/moment.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/simplebar.min.js"></script>
+    <script src='/js/daterangepicker.js'></script>
+    <script src='/js/jquery.stickOnScroll.js'></script>
+    <script src="/js/tinycolor-min.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/d3.min.js"></script>
+    <script src="/js/topojson.min.js"></script>
+    <script src="/js/datamaps.all.min.js"></script>
+    <script src="/js/datamaps-zoomto.js"></script>
+    <script src="/js/datamaps.custom.js"></script>
+    <script src="/js/Chart.min.js"></script>
+    <script src="/js/palette.js"></script>
+    <script src="/js/gauge.min.js"></script>
+    <script src="/js/jquery.sparkline.min.js"></script>
+    <script src="/js/apexcharts.min.js"></script>
+    <script src="/js/apexcharts.custom.js"></script>
+    <script src='/js/jquery.mask.min.js'></script>
+    <script src='/js/select2.min.js'></script>
+    <script src='/js/jquery.steps.min.js'></script>
+    <script src='/js/jquery.validate.min.js'></script>
+    <script src='/js/jquery.timepicker.js'></script>
+    <script src='/js/dropzone.min.js'></script>
+    <script src='/js/uppy.min.js'></script>
+    <script src='/js/quill.min.js'></script>
+    <script src='js/jquery.dataTables.min.js'></script>
+    <script src='js/dataTables.bootstrap4.min.js'></script>
+    <script src="/js/ckeditor/ckeditor.js"></script>
+    <script src="/js/apps.js"></script>
 </head>
 
 <body class="vertical bg-light">
@@ -46,9 +79,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="avatar avatar-sm mt-2">
-                            <img src="/storage/profile_pictures/{{ Auth::user()->profile_picture }}.webp"
+                            <img src="{{ Auth::user()->profile_picture ? '/storage/profile_pictures/' . Auth::user()->profile_picture . '.webp' : '/assets/avatars/default.webp' }}" alt="profile image"
                                 class="avatar-img"
-                                style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+                                style="width:40px;height:40px;border-radius:50%;object-fit:cover;"
+                                loading="lazy" />
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -78,6 +112,14 @@
                         </a>
                     </li>
                 </ul>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
+                        <a class="nav-link d-flex align-items-center {{ Route::currentRouteName() == 'dashboard' ? 'bg-primary rounded text-white font-weight-bold' : '' }}" href="{{ route('dashboard') }}">
+                            <i class="fe fe-airplay fe-16"></i>
+                            <span class="ml-3 item-text">Dashboard</span>
+                        </a>
+                    </li>
+                </ul>
             </nav>
         </aside>
         <main role="main" class="main-content">
@@ -94,7 +136,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+                            <h5 class="modal-title text-danger" id="exampleModalLabel">Logout</h5>
                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">x</span>
                             </button>
@@ -109,67 +151,35 @@
             </div>
         </main> <!-- main -->
     </div> <!-- .wrapper -->
-</body>
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/popper.min.js"></script>
-<script src="/js/moment.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/simplebar.min.js"></script>
-<script src='/js/daterangepicker.js'></script>
-<script src='/js/jquery.stickOnScroll.js'></script>
-<script src="/js/tinycolor-min.js"></script>
-<script src="/js/config.js"></script>
-<script src="/js/d3.min.js"></script>
-<script src="/js/topojson.min.js"></script>
-<script src="/js/datamaps.all.min.js"></script>
-<script src="/js/datamaps-zoomto.js"></script>
-<script src="/js/datamaps.custom.js"></script>
-<script src="/js/Chart.min.js"></script>
-<script src="/js/palette.js"></script>
-<script>
-    Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
-    Chart.defaults.global.defaultFontColor = colors.mutedColor;
-</script>
-<script src="/js/gauge.min.js"></script>
-<script src="/js/jquery.sparkline.min.js"></script>
-<script src="/js/apexcharts.min.js"></script>
-<script src="/js/apexcharts.custom.js"></script>
-<script src='/js/jquery.mask.min.js'></script>
-<script src='/js/select2.min.js'></script>
-<script src='/js/jquery.steps.min.js'></script>
-<script src='/js/jquery.validate.min.js'></script>
-<script src='/js/jquery.timepicker.js'></script>
-<script src='/js/dropzone.min.js'></script>
-<script src='/js/uppy.min.js'></script>
-<script src='/js/quill.min.js'></script>
-<script src='js/jquery.dataTables.min.js'></script>
-<script src='js/dataTables.bootstrap4.min.js'></script>
-<script src="/js/ckeditor/ckeditor.js"></script>
-<script src="/js/apps.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll("form").forEach(function(form) {
-            form.addEventListener("submit", function() {
-                let btn = form.querySelector("[type=submit]");
-                if (btn) {
-                    btn.disabled = true;
-                    btn.innerHTML = `
+    <script>
+        Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
+        Chart.defaults.global.defaultFontColor = colors.mutedColor;
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll("form").forEach(function(form) {
+                form.addEventListener("submit", function() {
+                    let btn = form.querySelector("[type=submit]");
+                    if (btn) {
+                        btn.disabled = true;
+                        btn.innerHTML = `
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Loading...
                 `;
-                }
+                    }
+                });
             });
         });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $(".collapseSidebar").on("click", function(e) {
-            e.preventDefault();
-            $("body").toggleClass("collapsed");
+    </script>
+    <script>
+        $(document).ready(function() {
+            $(".collapseSidebar").on("click", function(e) {
+                e.preventDefault();
+                $("body").toggleClass("collapsed");
+            });
         });
-    });
-</script>
+    </script>
+</body>
 
 </html>
