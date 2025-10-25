@@ -13,6 +13,8 @@ return new class extends Migration {
             $table->string('name', 64)->unique();
             $table->string('slug', 128)->unique();
             $table->text('description');
+            $table->string('location', 128);
+            $table->enum('status', ['active', 'not active'])->default('active');
             $table->dateTime('time_start');
             $table->dateTime('time_end');
             $table->timestamps();

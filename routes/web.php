@@ -5,6 +5,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 
 // fallback route
@@ -37,4 +38,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/update-profile', [ProfileController::class, 'update_profile'])->name('update.profile');
     Route::post('/change-password', [ProfileController::class, 'change_password'])->name('change.password');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+// only for admin
+Route::middleware(['role:admin'])->group(function () {
+    Route::get('/events', [EventController::class, 'events'])->name('events');
+    Route::get('/events/data', [EventController::class, 'events_data'])->name('events.data');
+    Route::get('/events/data/{id}', [EventController::class, 'events_data_id'])->name('events.data.id');
+    Route::post('/events/create', [EventController::class, 'events_create'])->name('events.create');
+    Route::post('/events/update', [EventController::class, 'events_update'])->name('events.update');
+    Route::post('/events/delete', [EventController::class, 'events_delete'])->name('events.delete');
 });

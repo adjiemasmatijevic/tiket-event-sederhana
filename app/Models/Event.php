@@ -10,7 +10,7 @@ class Event extends Model
     use HasUuids;
 
     protected $table = 'events';
-    protected $fillable = ['image', 'name', 'slug', 'description', 'time_start', 'time_end'];
+    protected $fillable = ['image', 'name', 'slug', 'description', 'location', 'status', 'time_start', 'time_end'];
 
     public function tickets()
     {
