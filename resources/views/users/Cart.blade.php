@@ -96,7 +96,7 @@ $totalFull = $totalPrice + $adminFee;
                     Total Product: Rp {{ number_format($totalPrice, 0, ',', '.') }}
                 </p>
                 <p class="text-muted mb-3" style="font-size: 0.9rem;">
-                    Admin Fee (10.7%): Rp {{ number_format($adminFee, 0, ',', '.') }}
+                    Admin Fee: Rp {{ number_format($adminFee, 0, ',', '.') }}
                 </p>
                 <p class="text-muted">Are you sure you want to continue?</p>
             </div>
