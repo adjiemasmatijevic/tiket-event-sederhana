@@ -8,7 +8,6 @@
     @csrf
     <div class="text-center">
         <img src="{{ asset('assets/images/logo.webp') }}" alt="logo" width="100" class="mb-3" loading="lazy">
-        <h1 class="h1 mb-0 text-primary">Rempah Tour</h1>
         <p class="mb-4 text-dark">please login to access more features</p>
     </div>
 
