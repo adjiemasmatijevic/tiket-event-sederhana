@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Ticket;
 use App\Models\Event;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 use Exception;
 
 class TicketController extends Controller
@@ -148,5 +150,30 @@ class TicketController extends Controller
         }
 
         return back()->with('success', 'Ticket deleted successfully');
+    }
+
+    public function my_tickets()
+    {
+        $userId = Auth::id();
+
+        $myTickets = Cart::query()
+            ->join('transactions', 'carts.transaction_id', '=', 'transactions.id')
+            ->join('tickets', 'carts.ticket_id', '=', 'tickets.id')
+            ->join('events', 'tickets.event_id', '=', 'events.id')
+            ->where('carts.user_id', $userId)
+            ->where('transactions.status', 'success')
+            ->select(
+                'carts.id as id_tiket',
+                'events.id as event_id',
+                'events.image as event_image',
+                'events.name as event_name',
+                'events.location as event_location',
+                'events.time_start as events_time_start',
+                'events.time_end as events_time_end',
+                'tickets.name as ticket_name',
+            )
+            ->get();
+
+        return view('users.MyTickets', compact('myTickets'));
     }
 }

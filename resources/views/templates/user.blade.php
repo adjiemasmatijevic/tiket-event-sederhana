@@ -69,7 +69,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="mytickets.html">
+                    <a class="nav-link {{ request()->routeIs('tickets.my_tickets') ? 'active' : '' }}" href="{{ route('tickets.my_tickets') }}">
                         <span class="dz-icon">
                             <i class="icon feather icon-sidebar"></i>
                         </span>
@@ -125,7 +125,7 @@
                     <i class="icon feather icon-home"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="mytickets.html" class="nav-link">
+                <a href="{{ route('tickets.my_tickets') }}" class="nav-link {{ request()->routeIs('tickets.my_tickets') ? 'active' : '' }}">
                     <i class="icon feather icon-sidebar"></i>
                     <span>Tickets</span>
                 </a>

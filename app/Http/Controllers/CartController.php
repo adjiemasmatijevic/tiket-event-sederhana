@@ -45,8 +45,8 @@ class CartController extends Controller
 
         $data = [
             'key' => $tdiApiKey,
-            'notif_url' => 'https://3986d8a6ca7c.ngrok-free.app/api/transaction-update',
-            'redirect_url' => route('transactions'),
+            'notif_url' => route('transaction.update'),
+            'redirect_url' => route('tickets.my_tickets'),
             'notes' => 'Buy tickets - ' . Auth::user()->email,
             'items' => [],
             'total' => $totalFull,
