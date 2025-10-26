@@ -100,8 +100,7 @@
                 <!-- nav bar -->
                 <div class="w-100 mb-2 d-flex">
                     <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="{{ route('dashboard') }}">
-                        <img src="/assets/images/logo.webp" class="w-25 mb-3" alt="logo">
-                        <h3 class="text-primary">@yield('app_name')</h3>
+                        <img src="/assets/images/logo.webp" class="w-50 mb-3" alt="logo">
                     </a>
                 </div>
                 <ul class="navbar-nav flex-fill w-100 mb-2">
