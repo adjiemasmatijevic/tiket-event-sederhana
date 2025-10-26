@@ -164,6 +164,7 @@ class TicketController extends Controller
             ->where('transactions.status', 'success')
             ->select(
                 'carts.id as id_tiket',
+                'carts.presence as presence',
                 'events.id as event_id',
                 'events.image as event_image',
                 'events.name as event_name',

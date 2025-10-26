@@ -25,7 +25,12 @@
                 </div>
 
                 <div class="order-detail">
-                    <span>{{ $ticket->ticket_name }}</span>
+                    <div class="d-flex gap-2">
+                        <span>{{ $ticket->ticket_name }}</span>
+                        @if($ticket->presence == 1)
+                        <span class="badge bg-success ms-3">Attended</span>
+                        @endif
+                    </div>
                     <div class="d-flex gap-1 align-items-center mt-1">
                         <span class="text-muted">{{ $ticket->event_location }}</span>
                     </div>
