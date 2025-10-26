@@ -5,9 +5,11 @@
 
 @section('content')
 <div class="container">
-    <br>
-    <div class="row">
-
+    <div class="row my-2">
+        <div class="col-12">
+            <h2 class="h3 mb-1 text-primary">My Tickets</h2>
+            <p class="mb-3 text-dark">Your ticket already to scan</p>
+        </div>
         @forelse ($myTickets as $ticket)
         <div class="col-12">
             <div class="dz-order">
@@ -58,7 +60,9 @@
                             </button>
                         </div>
                         <div class="modal-body text-center">
+                            <p>Hi, {{ Auth::user()->name }} <br>Silakan pindai kode QR ini saat check in.</p>
                             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ urlencode($ticket->id_tiket) }}" alt="QR Code for ticket {{ $ticket->id_tiket }}">
+                            <br><br>
                         </div>
                     </div>
                 </div>

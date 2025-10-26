@@ -34,8 +34,10 @@
         @enderror
     </div>
 
-    <button class="btn btn-primary w-100 btn-lg" type="submit">
+    <button class="btn btn-primary w-100 btn-lg mb-2" type="submit">
         Request Reset Password
     </button>
+    <a href="#" onclick="history.back()" class="btn btn-lg btn-light btn-block mb-3">Back</a>
+
 </form>
 @endsection

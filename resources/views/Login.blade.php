@@ -40,7 +40,8 @@
         </div>
     </div>
 
-    <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block mb-2" type="submit">Sign in</button>
+    <a href="#" onclick="history.back()" class="btn btn-lg btn-light btn-block mb-3">Back</a>
 
     <div class="d-flex justify-content-between align-items-center">
         <a href="{{ route('forgot.password') }}" class="btn btn-link">Forgot password</a>

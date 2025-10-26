@@ -13,9 +13,9 @@
 </head>
 
 <body class="bg-light">
-    <a href="{{ route('home') }}" class="btn btn-secondary m-3" style="position: absolute; top: 0; left: 0;">
+    {{-- <a href="{{ route('home') }}" class="btn btn-secondary m-3" style="position: absolute; top: 0; left: 0;">
         <i class="fa-solid fa-house"></i> Back to Home
-    </a>
+    </a> --}}
 
     <div class="d-flex align-items-center justify-content-center min-vh-100">
         @yield('content')

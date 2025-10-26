@@ -137,11 +137,11 @@
             <div class="toolbar-inner menubar-nav">
                 <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <i class="icon feather icon-home"></i>
-                    <span>Dashboard</span>
+                    <span>Home</span>
                 </a>
-                <a href="{{ route('tickets.my_tickets') }}" class="nav-link {{ request()->routeIs('tickets.my_tickets') ? 'active' : '' }}">
+                <a href="{{ route('tickets.my_tickets') }}" class="nav-link {{ request()->routeIs('tickets.my_tickets') ? 'active' : '' }}" style="white-space: nowrap;">
                     <i class="icon feather icon-sidebar"></i>
-                    <span>Tickets</span>
+                    <span>My Tickets</span>
                 </a>
                 <a href="{{ route('cart') }}" class="nav-link {{ request()->routeIs('cart') ? 'active' : '' }}">
                     <i class="icon feather icon-shopping-cart"></i>

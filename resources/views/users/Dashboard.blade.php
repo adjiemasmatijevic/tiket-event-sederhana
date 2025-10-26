@@ -9,15 +9,13 @@
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="banner-bg" style="
-                      background-image: url('/pic1.webp');
-                    "></div>
+                      background-image: url('/pic1.webp');"></div>
                 <div class="banner-content"><br><br><br><br><br>
                 </div>
             </div>
             <div class="swiper-slide">
                 <div class="banner-bg" style="
-                      background-image: url('/pic3.jpg');
-                    "></div>
+                      background-image: url('/pic3.jpg');"></div>
                 <div class="banner-content"><br><br><br><br><br>
                 </div>
             </div>
