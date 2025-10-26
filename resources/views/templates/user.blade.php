@@ -45,6 +45,11 @@
                             <img class="logo app-logo" src="/assets/images/logo.webp" alt="logo" />
                         </a>
                     </div>
+                    <div class="right-content">
+                        <a href="#" class="search-icon">
+                            <i class="icon feather icon-bell"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </header>
