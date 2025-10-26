@@ -1,0 +1,133 @@
+//login ====	
+.account-box{
+	.section-head{
+		padding: 20px;
+		h2{
+			font-weight: 800;
+		}
+	}
+	.logo-area{
+		text-align: center;
+		max-width: 130px;
+		margin: 40px auto 20px;
+		.logo-dark{
+			display: block;
+		}
+		.logo-light{
+			display: none;
+		}
+	}
+}
+
+.account-area{
+	form{
+        display: flex;
+        flex-direction: column;
+        
+		.saprate{
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+.social-btn-group{
+	margin-top: 10px;
+    margin-bottom: auto;
+	display: flex;
+	justify-content: center; 
+	align-items: center;
+    white-space: nowrap;
+    .social-btn{
+        width: 50px;
+        min-width: 50px;
+        height: 50px;
+        text-align: center;
+        border: 1px solid var(--border-color);
+		display: flex;
+		justify-content: center; 
+		align-items: center;
+		border-radius: 50px;
+        img{
+            width: 50%;
+            height: 50%;
+        }
+    }    
+}
+
+.saprate{
+	position: relative;
+	display: inline-block;
+	color: var(--primary);
+	font-size: 0.875rem;
+	padding: 0 70px;
+    &:after{    
+		content: "";
+		position: absolute;
+		width: 50px;
+		height: 1px;
+		background-color: #E7E7E7;
+		top: 50%;
+		left: 0;
+		transform: translateY(-50%);
+    }
+    &:before{    
+		content: "";
+		position: absolute;
+		width: 50px;
+		height: 1px;
+		background-color: #E7E7E7;
+		top: 50%;
+		right: 0;
+		transform: translateY(-50%);
+    }
+}
+
+.input-group > .form-control:focus, .input-group > .form-select:focus{
+    z-index: unset;
+}
+.digit-group {
+	display: flex;
+	flex-direction: initial;
+	margin-bottom: 20px;
+	justify-content: center;
+	input {
+		margin: 0 8px;
+		border-radius: 0;
+		text-align: center;
+		font-size: 18px;
+		color: var(--dark);
+		padding: 0;
+		width: 50px;
+		height: 50px;
+	}
+}
+
+.seprate-box{
+	display: flex;
+	align-items: center;
+	.back-btn{
+		margin-right: 15px;
+		width: 50px;
+		min-width: 50px;
+		height: 50px;
+		background-color: #f8f8f8;
+		border: 1px solid var(--border-color);
+		text-align: center;
+		color: #fff;
+		font-size: 20px;
+		svg{
+			path{
+				fill: var(--primary);
+			}
+		}
+	}
+}
+
+/* DEFULT CSS CLASS */
+.dz-flex-box{
+	display: flex;
+	align-items: center;
+	justify-content:  center;
+}

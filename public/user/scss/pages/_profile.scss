@@ -1,0 +1,139 @@
+
+// PROFILE  ===
+
+//Profile Page ====
+.notify-cart2{
+	position: relative;
+	margin-right: 10px;
+	.badge{
+		position: absolute;
+		top: -12px;
+		right: -12px;
+		border-radius: 50%;
+		border: 2px solid #fff;
+		font-size: 12px;
+		width: 25px;
+		padding: 0;
+		min-width: 25px;
+		height: 25px;
+		text-align: center;
+		line-height: 22px;
+	}
+}
+
+.profile-area{
+	.main-profile{
+		margin-bottom: 20px;
+		display: flex;
+		position: relative;
+		align-items: center;
+		.profile-detail{
+			.name{
+				margin-bottom: 5px;
+			}
+			span{
+				display: block;
+			}
+			.title{
+				font-weight: 600;
+				font-family: var(--font-family-title);
+			}		
+		}
+		.edit-profile{
+			margin-left: auto;
+			font-size: 24px;
+		}
+	}
+	.content-box{
+		margin: 0px -15px;
+		padding: 0 15px 20px;
+		border-bottom: 1px solid var(--border-color);
+		ul{
+			li{
+				text-align: center;
+				a{
+					display: flex;
+					align-items: center;
+					background: var(--bg-white);
+					padding: 5px 15px;
+					box-shadow: var(--box-shadow);
+					/* box-shadow: 0px 2px 8px 0px rgba(99, 99, 99, 0.2); */
+				}
+				.dz-icon-box{
+					font-size: 20px;
+					margin-right: 10px;
+				}
+				span{
+					font-family: var(--font-family-title);
+					color: var(--title);
+					font-weight: 600;
+				}
+			}
+		}	
+	}
+}
+
+// Profile > Address Screen ===
+.card{
+	&.address-card{
+		border-radius: 0;		
+		box-shadow: var(--box-shadow);
+		.card-header{
+			padding-bottom: 0;
+		}	
+		.card-body{
+			ul{
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 10px;
+			}
+		}
+		.card-footer{
+			display: flex;
+			padding: 0;
+			> *{
+				border-right: 1px solid var(--border-color);
+			}
+			.footer-link{
+				padding: 12px;
+				width: 100%;
+				text-align: center;
+				font-size: 16px;
+				font-weight: 700;
+				color: var(--title);
+				font-family: var(--font-family-title);
+			}
+		}	
+	}
+}
+
+// Profile > Coupons Screen ===
+.dz-offer-coupon{
+	display: flex;
+    align-items: center;
+    background: var(--bg-white);
+    padding: 12px 15px;
+	margin-bottom: 15px;
+	box-shadow: var(--box-shadow);
+	.offer{
+		width: 50px;
+		height: 40px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-right: 15px;
+		padding-right: 15px;
+		border-right: 2px dashed var(--border-color);
+	}
+	h6{
+		margin-bottom: 0;
+		font-weight: 700;
+	}
+	p{
+		margin-bottom: 0;
+		font-family: var(--font-family-title);
+		color: var(--title);
+		font-weight: 500;
+	}
+}

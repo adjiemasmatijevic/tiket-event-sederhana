@@ -1,0 +1,78 @@
+.loader-screen{
+    position: fixed;
+	background-color: var(--bg-white);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+.main-screen{
+	overflow: hidden;
+    z-index: 999999;
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	flex-direction: column;
+	.loader{		
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 10px;
+	}
+	.title{
+		font-weight: 900;
+		font-size: 24px;
+		font-family: var(--font-family-title);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		span{
+			display: block;
+		}
+	}
+	.item-1{
+		margin-top:-370px;
+		width: 20px;
+	}
+	.item-2{
+		margin-top:-370px;
+		width: 20px;
+	}
+	.meat-center{
+	}
+}
+@keyframes dzAnimatePreloder{
+    0%{
+		transform: scale(1);
+	}
+    80%, 100%{
+		transform: scale(0);
+	}
+}
+
+
+.text-effect{
+	position: relative;
+	svg{
+		position: absolute;
+		bottom: -10px;
+		left: 0px;
+		width: 100px;
+		height: 12px;
+		path{
+			stroke-dasharray: 78.5902;
+			stroke-dashoffset: 0;
+			transition:all 1s;
+		}
+	}
+	&.wow.animated svg path{
+		stroke-dashoffset:  78.5902;
+	}
+}

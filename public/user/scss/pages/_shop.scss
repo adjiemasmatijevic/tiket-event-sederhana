@@ -1,0 +1,377 @@
+.price{
+	margin-bottom: 0;			
+	color: var(--primary);
+	font-weight: 700;
+	del{
+		color: $body-color;
+		font-weight: 400;
+		margin-left: 6px;
+		font-size: 14px;
+	}
+}
+
+.brand-tag{
+	display: block;
+	margin-bottom: 5px;
+}
+
+.item-bookmark{
+	i{
+		font-size: 18px;
+	}
+	svg{
+		width: 20px;
+		height: auto;
+		path{
+			stroke: var(--primary);
+		}
+	}
+    &.active{
+		i{
+			color: #ff586e;
+		}
+        svg{
+            path{
+                fill: #ff586e;    
+            }
+            path{
+                stroke: #ff586e;
+            }
+        }    
+    }
+}
+
+.shop-card{
+	position: relative;
+	overflow: hidden;
+	background-color: var(--bg-white);
+	height: 100%;
+	box-shadow: var(--box-shadow);
+	.dz-media{
+		.item-bookmark{
+			position: absolute;
+			top: 8px;
+			right: 8px;
+			z-index: 1;
+		}
+	}
+	.dz-content{
+		background-color: var(--bg-white);
+		padding: 10px 10px;
+		.title{
+			font-size: 14px;
+			font-weight: 500;	
+		}
+	}
+	.price{
+		del{
+			font-size: 14px;
+		}
+	}
+	.product-tag{
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.badge {
+			border-radius: 0;
+			padding: 4px 8px;
+			border: 0;
+			font-size: 10px;
+			font-weight: 400;
+		}
+	}
+	&.style-2{
+		background-color: unset;
+		box-shadow: unset;
+		.dz-content{
+			background-color: unset;
+			padding: 10px 0;
+			.title{
+				font-size: 14px;
+				font-weight: 500;	
+			}
+		}
+		.product-tag{
+			position: absolute;
+			top: auto;
+			bottom: 0;
+			left: 0;
+			display: flex;
+			background-color: rgba(0, 0, 0, 0.60);
+			width: auto;
+			padding: 0 8px;
+			span{
+				font-size: 12px;
+				display: inline-block;
+				color: #afafaf;
+				position: relative;
+				i{
+					color: #DA8D46; 
+				}
+				&.review{
+					color: #fff; 
+					font-weight: 500;
+					&:after{
+						content: "";
+						position: absolute;
+						width: 1px;
+						background-color: rgba(255, 255, 255, 0.60);
+						height: 10px;
+						right: -4px;
+						top: 50%;
+						transform: translateY(-50%);
+					}
+				}
+			}
+		}
+	}
+}
+
+.dz-filter-canvas{
+	border-radius: 0!important;
+	.offcanvas-header{
+		justify-content: unset;
+		.btn-close{
+			line-height: 0;
+			padding: 0;
+			font-size: 26px;
+			margin-right: 12px;
+		}
+		.offcanvas-title{
+			font-weight: 700;
+		}
+	}
+	.filter-content{
+		display: table;
+		margin: 0 -15px;
+		.form-check{
+			width: 50%;
+			padding: 0 15px 15px;
+			float: left;
+		}
+	}
+	.form-check{
+		justify-content: space-between;
+		padding-left: 0;
+		padding-bottom: 15px;
+		.form-check-input{
+			margin-right: 0;
+			width: 20px;
+			min-width: 20px;
+			height: 20px;
+			&:focus{
+				box-shadow: unset;
+			}
+		}
+	}
+}
+
+// Category Style Start ===
+.dz-category-card{
+	position: relative;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.10);
+	.category-image{
+		position: absolute;
+		background-size: cover;
+		background-position: center;
+		height: 100%;
+		width: 100%;
+		z-index: -1;
+	}
+	.category-content{
+		padding: 20px 15px;
+		height: 150px;
+		display: flex;
+		flex-direction: column;
+		width: 50%;
+		span{
+			display: block;
+			margin-bottom: 5px;
+		}
+		.title{
+			font-weight: 800;
+			margin-bottom: 5px;
+			color: #000;
+		}
+		p{
+			margin-bottom: 10px;
+			font-size: 14px;
+			color: #000;
+			opacity: 0.6;
+		}
+		.shop-btn{
+			margin-top: auto;
+		}
+	}
+	&.style-2{
+		.category-content{			
+			width: 50%;
+			margin-left: auto;	
+			p{
+				font-size: 16px;
+			}
+			.title{
+				margin-bottom: 0;
+			}
+			.btn{
+				font-size: 14px;
+				font-weight: 400;
+				padding: 6px 14px;
+				text-transform: uppercase;
+			}
+		}
+	}
+	&.card-light{
+		color: #fff;
+		.title{
+			color: #fff;
+		}
+	}
+}
+// Category Style End===
+
+// Cart Style Start===
+.cart-box{
+	display: flex;
+    align-items: center;
+    background: var(--bg-white);
+    padding: 10px 12px;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 15px;
+	box-shadow: var(--box-shadow);
+	.dz-media{
+		width: 80px;
+		margin-right: 15px;
+		min-width: 80px;
+	}
+	.cart-content{
+		width: 100%;
+		.brand-tag{
+			margin-bottom: 10px;
+		}
+	}
+	.cart-footer{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.dz-stepper{
+			margin-left: auto;
+		}
+	}
+}
+
+.user-status{
+	display: flex;
+	align-items: center;
+	justify-content: space-between; 
+}
+
+.coupon-bx{
+	background-color: var(--bg-white);
+	position: relative;
+	.form-control{
+		border: 0;
+		height: 45px;
+		background-color: var(--bg-white);
+		padding: 10px 50px;
+		border: 2px dashed var(--border-color);
+		font-weight: 600;
+		&:focus{
+			box-shadow: unset;
+		}
+	}
+	.icon{
+		width: 30px;
+		color: var(--primary);
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		font-size: 18px;
+		&.icon-left{
+			left: 15px;
+		}
+		&.icon-right{
+			right: 0;		
+		}
+	}
+	&.style-2{
+		padding: 12px 15px;
+		display: flex;
+		align-items: center;
+		background-color: #eee;
+		i{
+			font-size: 22px;
+			color: #a6a6a6;
+		}
+	}
+}
+
+.view-cart{
+    padding-top: 15px;
+    ul{
+        li{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+			padding-bottom: 8px;
+            span{
+                display: block;
+                font-size: 14px;
+            }
+			.price{
+				color: var(--title);
+			}
+        }
+		.divider{
+			border-color: var(--border-color);
+		}
+    }
+	&.style-2{
+		background-color: var(--bg-white);
+		margin: 0 -15px;
+		padding: 15px 15px 5px;
+		.name{
+			color: #6A6A6A;
+		}
+	}
+}
+// Cart Style End ===
+
+// Payment Style Start ===
+.add-bank{
+	.offcanvas-header{
+		padding: 5px 15px;
+		.input-group{
+			
+		}
+	}
+	.offcanvas-body{
+		background-color: var(--body-bg);
+	}
+	.card{
+		border-radius: 0;
+		.card-body{
+			.media{
+				margin: 15px auto;
+			}
+		}
+	}
+}
+
+.item-list{
+	display: table;
+	.list{
+		padding: 6px 0;
+		width: 50%;
+		float: left;
+		a{
+			font-size: 14px;
+			font-weight: 500;
+		}
+	}
+}
+// Payment Style End ===
