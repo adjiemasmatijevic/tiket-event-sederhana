@@ -11,7 +11,6 @@ return new class extends Migration {
             $table->uuid('id')->primary();
             $table->uuid('user_id');
             $table->uuid('ticket_id');
-            $table->string('ticket_no', 255)->unique()->nullable();
             $table->boolean('presence')->default(0);
             $table->uuid('transaction_id')->nullable();
             $table->enum('status', ['available', 'checkout'])->default('available');
