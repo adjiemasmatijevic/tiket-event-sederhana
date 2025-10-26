@@ -230,6 +230,16 @@ class EventController extends Controller
             return back()->with('error', 'Event or Ticket not found');
         }
 
+        $totalSameTicketInCart = Cart::where('ticket_id', $ticket->id)
+            ->whereHas('transaction', function ($query) {
+                $query->where('status', 'success');
+            })
+            ->count();
+
+        if ($totalSameTicketInCart + $request->quantity > $ticket->total) {
+            return back()->with('error', 'Ticket limit exceeded');
+        }
+
         try {
             for ($i = 0; $i < $request->quantity; $i++) {
                 $cart = new Cart();
