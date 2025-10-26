@@ -79,7 +79,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="cart.html">
+                    <a class="nav-link {{ request()->routeIs('cart') ? 'active' : '' }}" href="{{ route('cart') }}">
                         <span class="dz-icon">
                             <i class="icon feather icon-shopping-cart"></i>
                         </span>
@@ -137,7 +137,7 @@
                     <i class="icon feather icon-sidebar"></i>
                     <span>Tickets</span>
                 </a>
-                <a href="cart.html" class="nav-link">
+                <a href="{{ route('cart') }}" class="nav-link {{ request()->routeIs('cart') ? 'active' : '' }}">
                     <i class="icon feather icon-shopping-cart"></i>
                     <span>Cart</span>
                 </a>

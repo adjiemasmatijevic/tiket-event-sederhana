@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckerController;
+use App\Http\Controllers\CartController;
 
 // fallback route
 Route::fallback(function () {
@@ -74,4 +75,7 @@ Route::middleware(['role:checker'])->group(function () {
 Route::middleware(['role:user'])->group(function () {
     Route::get('/event/tickets/{id}', [EventController::class, 'event_tickets'])->name('event_tickets');
     Route::post('/event/tickets/add-to-cart', [EventController::class, 'event_tickets_add_to_cart'])->name('event_tickets.add_to_cart');
+
+    Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+    Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.checkout');
 });

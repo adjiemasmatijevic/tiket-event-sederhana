@@ -242,6 +242,6 @@ class EventController extends Controller
             return back()->with('error', 'Failed to add ticket to cart');
         }
 
-        return back()->with('success', 'Ticket added to cart successfully');
+        return redirect()->route('cart')->with('success', 'Ticket added to cart successfully');
     }
 }
