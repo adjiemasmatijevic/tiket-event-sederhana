@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Ticket;
 use App\Models\User;
 use App\Models\Cart;
+use App\Models\Transaction;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -32,7 +33,8 @@ class DashboardController extends Controller
             $query->where('status', 'success');
         })
             ->count();
-        $totalRevenue = 0;
+        $totalRevenue = Transaction::where('status', 'success')
+            ->sum('amount_total');
 
 
         $totalUsers = User::where('role', 'user')->count();

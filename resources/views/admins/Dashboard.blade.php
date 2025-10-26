@@ -72,7 +72,7 @@
                         </span>
                     </div>
                     <div class="col pr-0">
-                        <p class="small text-dark mb-0">Total Revenue</p>
+                        <p class="small text-dark mb-0">Gross Revenue</p>
                         <span class="h3 mb-0">IDR {{ number_format($totalRevenue ?? 0, 0, ',', '.') }}</span>
                     </div>
                 </div>
