@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Http;
@@ -26,6 +27,7 @@ class TransactionController extends Controller
             'expired_at',
             'created_at'
         ])
+            ->where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'DESC')
             ->orderBy('expired_at', 'DESC');
 
