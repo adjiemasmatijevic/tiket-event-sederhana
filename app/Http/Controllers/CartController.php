@@ -97,6 +97,6 @@ class CartController extends Controller
             $item->save();
         }
 
-        return back()->with('success', 'Checkout successful. Your tickets are being processed.');
+        return redirect('https://payment.talangdigital.com/transaction-detail/' . $response['id']);
     }
 }
