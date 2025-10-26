@@ -4,27 +4,16 @@
 @section('title', 'Dashboard')
 
 @section('content')
-@if ($upcomingEvents->isNotEmpty())
 <div class="dz-banner">
     <div class="swiper banner-swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <div class="banner-bg" style="
-                      background-image: url('/pic1.webp');
-                    "></div>
-                <div class="banner-content"><br><br><br><br><br>
-                    <a href="{{ route('event_tickets', $upcomingEvents->first()->id) }}" class="btn btn-primary btn-sm">Get Ticket</a>
-                </div>
+                <div class="banner-bg" style="background-image: url('/pic1.webp');"></div>
             </div>
         </div>
         <div class="swiper-pagination style-2"></div>
     </div>
 </div>
-@else
-<div class="alert alert-info text-center" role="alert">
-    No upcoming events available.
-</div>
-@endif
 <!-- Banner End -->
 
 
