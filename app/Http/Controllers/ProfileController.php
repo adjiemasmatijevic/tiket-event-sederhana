@@ -16,6 +16,11 @@ class ProfileController extends Controller
     public function profile()
     {
         $user = User::where('id', Auth::user()->id)->first();
+
+        if ($user->role == 'user') {
+            return view('users.Profile', compact('user'));
+        }
+
         return view('Profile', compact('user'));
     }
 
