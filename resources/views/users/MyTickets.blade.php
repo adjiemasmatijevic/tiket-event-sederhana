@@ -62,7 +62,7 @@
 
         @empty
         <div class="col-12">
-            section <div class="alert alert-info text-center">
+            <div class="alert alert-info text-center">
                 You do not have any purchased tickets yet.
             </div>
         </div>
