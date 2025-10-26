@@ -10,7 +10,7 @@
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="banner-bg" style="
-                      background-image: url('/storage/event_images/{{ $upcomingEvents->first()->image }}.webp');
+                      background-image: url('/pic1.webp');
                     "></div>
                 <div class="banner-content"><br><br><br><br><br>
                     <a href="{{ route('event_tickets', $upcomingEvents->first()->id) }}" class="btn btn-primary btn-sm">Get Ticket</a>
