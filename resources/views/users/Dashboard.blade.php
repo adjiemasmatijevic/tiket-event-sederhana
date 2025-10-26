@@ -8,7 +8,11 @@
     <div class="swiper banner-swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <div class="banner-bg" style="background-image: url('/pic1.webp');"></div>
+                <div class="banner-bg" style="
+                      background-image: url('/pic1.webp');
+                    "></div>
+                <div class="banner-content"><br><br><br><br><br>
+                </div>
             </div>
         </div>
         <div class="swiper-pagination style-2"></div>
