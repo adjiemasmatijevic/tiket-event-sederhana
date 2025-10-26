@@ -36,6 +36,8 @@ class DashboardController extends Controller
         $totalRevenue = Transaction::where('status', 'success')
             ->sum('amount_total');
 
+        $net = $totalRevenue - ($totalRevenue * 0.05);
+
 
         $totalUsers = User::where('role', 'user')->count();
         $totalCheckers = User::where('role', 'checker')->count();
@@ -48,7 +50,8 @@ class DashboardController extends Controller
             'ticketsSold',
             'totalUsers',
             'totalCheckers',
-            'totalRevenue'
+            'totalRevenue',
+            'net'
         ));
     }
 
