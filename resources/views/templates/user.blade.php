@@ -54,10 +54,16 @@
                 <div class="dz-media">
                     <img src="{{ Auth::user()->profile_picture ? '/storage/profile_pictures/' . Auth::user()->profile_picture . '.webp' : '/assets/avatars/default.webp' }}" alt="author-image" />
                 </div>
+                @if(Auth::check())
                 <div class="dz-info">
                     <h5 class="name">{{ Auth::user()->name }}</h5>
                     <span>{{ Auth::user()->email }}</span>
                 </div>
+                @else
+                <div class="dz-info">
+                    <h5 class="name">Guest</h5>
+                </div>
+                @endif
             </a>
             <ul class="nav navbar-nav">
                 <li>

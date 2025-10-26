@@ -1,109 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('templates.user')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Coming Soon | SPASI Ticket</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        body {
-            background-image: url('https://spasicreative.space//assets/awe/assets/img/bg_foot.jpg');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center center;
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-        }
+@section('app_name', config('app.name'))
+@section('title', 'Dashboard')
 
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-
-        #countdown {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-        }
-
-        .social-icons a {
-            color: #fff;
-            margin: 0 10px;
-            font-size: 1.5rem;
-            transition: 0.3s;
-        }
-
-        .social-icons a:hover {
-            color: #ff7014;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            z-index: -1;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="overlay"></div>
-
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <img src="https://spasicreative.space/assets/awe/assets/img/logo2.png" width="150px" alt="">
-                <h1 class="mt-5 mb-3">Coming Soon</h1>
-                <p class="mb-4">We're working hard to launch our new Platform. Stay tuned!</p>
-
-                <div id="countdown" class="mb-4 fw-bold"></div>
-
-                <div class="social-icons">
-                    <a href="#"><i class="bi bi-instagram"></i></a>
-                    <a href="#"><i class="bi bi-spotify"></i></a>
-                    <!-- <a href="#"><i class="bi bi-twitter-x"></i></a> -->
-                    <a href="#"><i class="bi bi-youtube"></i></a>
+@section('content')
+<div class="dz-banner">
+    <div class="swiper banner-swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="banner-bg" style="
+                      background-image: url('/pic1.webp');
+                    "></div>
+                <div class="banner-content"><br><br><br><br><br>
                 </div>
             </div>
+            <div class="swiper-slide">
+                <div class="banner-bg" style="
+                      background-image: url('/pic3.jpg');
+                    "></div>
+                <div class="banner-content"><br><br><br><br><br>
+                </div>
+            </div>
+            <div class="swiper-pagination style-2"></div>
         </div>
     </div>
+</div>
+<!-- Banner End -->
 
-    <script>
-        // Countdown Timer
-        const countdown = document.getElementById("countdown");
-        const launchDate = new Date("2025-10-26T20:30:00").getTime();
 
-        const timer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = launchDate - now;
+<div class="title-bar container mb-0 pb-0">
+    <h5 class="title font-w800 mb-0">Upcoming</h5>
+</div>
 
-            if (distance < 0) {
-                clearInterval(timer);
-                countdown.innerHTML = "We're Live!";
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const secs = Math.floor((distance % (1000 * 60)) / 1000);
-
-            countdown.innerHTML = `${days}d ${hours}h ${mins}m ${secs}s`;
-        }, 1000);
-    </script>
-
-</body>
-
-</html>
+<!-- Shop Section Strat -->
+<div class="container">
+    <div class="row g-3">
+        <div class="col-6">
+            @forelse ($upcomingEvents as $event)
+            <a href="{{ route('event_tickets', $event->id) }}">
+                <div class="shop-card">
+                    <div class="dz-media">
+                        <img src="/storage/event_images/{{ $event->image }}.webp" alt="image" />
+                    </div>
+                    <div class="dz-content">
+                        <span class="font-12 text-muted">{{ $event->location }}</span>
+                        <h6 class="title">
+                            <a href="{{ route('event_tickets', $event->id) }}">{{ $event->name }}</a>
+                        </h6>
+                    </div>
+                </div>
+            </a>
+            @empty
+            <p>No upcoming events available.</p>
+            @endforelse
+        </div>
+    </div>
+</div>
+@endsection
