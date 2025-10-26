@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Event;
+use Carbon\Carbon;
 
 class LandingController extends Controller
 {
     public function home()
     {
-        return view('welcome');
+        $upcomingEvents = Event::where('time_start', '>=', Carbon::today())
+            ->orderBy('time_start', 'asc')
+            ->get();
+        return view('welcome', compact('upcomingEvents'));
     }
 }
