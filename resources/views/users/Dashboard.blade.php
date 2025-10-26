@@ -45,7 +45,7 @@
                     <div class="dz-content">
                         <span class="font-12 text-muted">{{ $event->location }}</span>
                         <h6 class="title">
-                            <a href="product-detail.html">{{ $event->name }}</a>
+                            <a href="{{ route('event_tickets', $event->id) }}">{{ $event->name }}</a>
                         </h6>
                     </div>
                 </div>
