@@ -11,6 +11,8 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckerController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\TransactionController;
+
 
 // fallback route
 Route::fallback(function () {
@@ -79,4 +81,11 @@ Route::middleware(['role:user'])->group(function () {
     Route::get('/cart', [CartController::class, 'cart'])->name('cart');
     Route::post('/cart/remove', [CartController::class, 'cart_remove'])->name('cart.remove');
     Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.checkout');
+
+    Route::get('/transactions', [TransactionController::class, 'transactions'])->name('transactions');
+    Route::get('/transactions/data', [TransactionController::class, 'transactions_data'])->name('transactions.data');
+    Route::post('/transactions/cancel', [TransactionController::class, 'transactions_cancel'])->name('transactions.cancel');
+
+    Route::get('/tickets/my-tickets', [TicketController::class, 'my_tickets'])->name('tickets.my_tickets');
+    Route::get('/tickets/my-tickets/data', [TicketController::class, 'my_tickets_data'])->name('tickets.my_tickets_data');
 });
