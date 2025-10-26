@@ -15,11 +15,15 @@
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100;200;300;400;500;600;700;800;900;1000&family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet" />
+
+    <script src="/user/js/jquery.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 </head>
 
 <body data-theme-color="color-blue">
     <div class="page-wrapper">
-        <!-- Preloader -->
         <div id="preloader">
             <div class="loader">
                 <div class="load-circle">
@@ -28,9 +32,6 @@
                 </div>
             </div>
         </div>
-        <!-- Preloader end-->
-
-        <!-- Header -->
         <header class="header shadow header-fixed border-0">
             <div class="container">
                 <div class="header-content">
@@ -47,9 +48,6 @@
                 </div>
             </div>
         </header>
-        <!-- Header -->
-
-        <!-- Sidebar -->
         <div class="dark-overlay"></div>
         <div class="sidebar" style="background-image: url('/user/images/background/bg3.png')">
             <a href="profile.html" class="author-box">
@@ -87,7 +85,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="order.html">
+                    <a class="nav-link {{ request()->routeIs('transactions') ? 'active' : '' }}" href="{{ route('transactions') }}">
                         <span class="dz-icon">
                             <i class="icon feather icon-list"></i>
                         </span>
@@ -118,15 +116,9 @@
                 </div>
             </div>
         </div>
-        <!-- Sidebar End -->
-
-        <!-- Page Content Start -->
         <div class="page-content space-top p-b80">
             @yield('content')
         </div>
-        <!-- Page Content End -->
-
-        <!-- Menubar -->
         <div class="menubar-area footer-fixed rounded-0">
             <div class="toolbar-inner menubar-nav">
                 <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
@@ -141,7 +133,7 @@
                     <i class="icon feather icon-shopping-cart"></i>
                     <span>Cart</span>
                 </a>
-                <a href="order.html" class="nav-link">
+                <a href="{{ route('transactions') }}" class="nav-link {{ request()->routeIs('transactions') ? 'active' : '' }}">
                     <i class="icon feather icon-list"></i>
                     <span>Transactions</span>
                 </a>
@@ -151,19 +143,11 @@
                 </a>
             </div>
         </div>
-        <!-- Menubar -->
     </div>
-    <!--**********************************
-    Scripts
-***********************************-->
-    <script src="/user/js/jquery.js"></script>
     <script src="/user/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/user/vendor/swiper/swiper-bundle.min.js"></script>
-    <!-- Swiper -->
     <script src="/user/vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
-    <!-- Swiper -->
     <script src="/user/js/dz.carousel.js"></script>
-    <!-- Swiper -->
     <script src="/user/js/settings.js"></script>
     <script src="/user/js/custom.js"></script>
     <script src="/index.js"></script>
@@ -203,9 +187,9 @@
                     if (btn) {
                         btn.disabled = true;
                         btn.innerHTML = `
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Loading...
-                `;
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Loading...
+                    `;
                     }
                 });
             });
