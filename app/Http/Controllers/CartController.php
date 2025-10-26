@@ -88,7 +88,7 @@ class CartController extends Controller
             'tdi_pay_id' => $response['id'],
             'amount_total' => $totalFull,
             'status' => 'pending',
-            'expire_at' => now()->addDays(1),
+            'expired_at' => now()->addDays(1),
         ]);
 
         foreach ($cartItems as $item) {
