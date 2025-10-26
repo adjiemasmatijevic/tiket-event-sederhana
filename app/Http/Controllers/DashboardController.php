@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
 use App\Models\Ticket;
 use App\Models\User;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -51,6 +52,9 @@ class DashboardController extends Controller
 
     private function user()
     {
-        return view('users.Dashboard');
+        $upcomingEvents = Event::where('time_start', '>=', Carbon::today())
+            ->orderBy('time_start', 'asc')
+            ->get();
+        return view('users.Dashboard', compact('upcomingEvents'));
     }
 }

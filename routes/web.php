@@ -69,3 +69,9 @@ Route::middleware(['role:checker'])->group(function () {
     Route::get('/gate-check', [CheckerController::class, 'showGateCheck'])->name('gate-check');
     Route::post('/gate-check/scan', [CheckerController::class, 'processScan'])->name('gate-check.scan');
 });
+
+// only for user
+Route::middleware(['role:user'])->group(function () {
+    Route::get('/event/tickets/{id}', [EventController::class, 'event_tickets'])->name('event_tickets');
+    Route::post('/event/tickets/add-to-cart', [EventController::class, 'event_tickets_add_to_cart'])->name('event_tickets.add_to_cart');
+});

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Ticket;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -12,6 +14,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\File;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -192,5 +195,53 @@ class EventController extends Controller
         }
 
         return back()->with('success', 'Event deleted successfully');
+    }
+
+    public function event_tickets($id)
+    {
+        $event = Event::where('id', $id)->first();
+
+        if (!$event) {
+            return redirect()->route('dashboard');
+        }
+
+        $tickets = Ticket::where('event_id', $id)->orderBy('price', 'asc')->get();
+        return view('users.Event', compact('event', 'tickets'));
+    }
+
+    public function event_tickets_add_to_cart(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'event_id' => 'required|exists:events,id',
+            'ticket_id' => 'required|exists:tickets,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->with('error', $validator->errors()->first())
+                ->withInput();
+        }
+
+        $event = Event::where('id', $request->event_id)->first();
+        $ticket = Ticket::where('id', $request->ticket_id)->first();
+
+        if (!$event || !$ticket) {
+            return back()->with('error', 'Event or Ticket not found');
+        }
+
+        try {
+            for ($i = 0; $i < $request->quantity; $i++) {
+                $cart = new Cart();
+                $cart->user_id = Auth::user()->id;
+                $cart->ticket_id = $ticket->id;
+                $cart->save();
+            }
+        } catch (Exception $e) {
+            Log::error('Failed to add ticket to cart: ' . $e->getMessage());
+            return back()->with('error', 'Failed to add ticket to cart');
+        }
+
+        return back()->with('success', 'Ticket added to cart successfully');
     }
 }
