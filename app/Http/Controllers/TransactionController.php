@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Http;
 
@@ -80,5 +81,35 @@ class TransactionController extends Controller
         $transaction->status = 'canceled';
         $transaction->save();
         return back()->with('success', 'Transaction has been cancelled');
+    }
+
+    public function transaction_update(Request $request)
+    {
+        $payload = $request->all();
+        $jsonString = $payload[0];
+        $data = json_decode($jsonString);
+
+        $status = $data->status ?? null;
+        $id = $data->id ?? null;
+
+        if ($status === 'canceled' || $status === 'expired') {
+            $transaction = Transaction::where('tdi_pay_id', $id)->first();
+
+            if ($transaction) {
+                $transaction->status = 'canceled';
+                $transaction->save();
+            }
+        } elseif ($status === 'succeeded') {
+            $transaction = Transaction::where('tdi_pay_id', $id)->first();
+
+            if ($transaction) {
+                $transaction->status = 'success';
+                $transaction->save();
+            }
+        }
+
+        return response()->json([
+            'status'  => 'success'
+        ]);
     }
 }
