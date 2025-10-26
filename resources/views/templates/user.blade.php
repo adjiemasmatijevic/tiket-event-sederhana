@@ -51,15 +51,18 @@
         <div class="dark-overlay"></div>
         <div class="sidebar" style="background-image: url('/user/images/background/bg3.png')">
             <a href="profile.html" class="author-box">
+                @if(Auth::check())
                 <div class="dz-media">
                     <img src="{{ Auth::user()->profile_picture ? '/storage/profile_pictures/' . Auth::user()->profile_picture . '.webp' : '/assets/avatars/default.webp' }}" alt="author-image" />
                 </div>
-                @if(Auth::check())
                 <div class="dz-info">
                     <h5 class="name">{{ Auth::user()->name }}</h5>
                     <span>{{ Auth::user()->email }}</span>
                 </div>
                 @else
+                <div class="dz-media">
+                    <img src="/assets/avatars/default.webp" alt="author-image" />
+                </div>
                 <div class="dz-info">
                     <h5 class="name">Guest</h5>
                 </div>
