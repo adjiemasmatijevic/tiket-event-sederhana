@@ -83,7 +83,7 @@
     <script>
         // Countdown Timer
         const countdown = document.getElementById("countdown");
-        const launchDate = new Date("2025-10-26T15:00:00").getTime();
+        const launchDate = new Date("2025-10-26T20:30:00").getTime();
 
         const timer = setInterval(() => {
             const now = new Date().getTime();
