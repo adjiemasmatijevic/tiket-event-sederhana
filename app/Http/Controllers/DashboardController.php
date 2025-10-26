@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Models\Cart;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -27,8 +28,12 @@ class DashboardController extends Controller
         $activeEvents = Event::where('status', 'active')->count();
         $totalTickets = Ticket::sum('total');
 
-        $ticketsSold = 0;
+        $ticketsSold = Cart::whereHas('transaction', function ($query) {
+            $query->where('status', 'success');
+        })
+            ->count();
         $totalRevenue = 0;
+
 
         $totalUsers = User::where('role', 'user')->count();
         $totalCheckers = User::where('role', 'checker')->count();
