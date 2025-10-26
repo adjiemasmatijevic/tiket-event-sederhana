@@ -77,5 +77,6 @@ Route::middleware(['role:user'])->group(function () {
     Route::post('/event/tickets/add-to-cart', [EventController::class, 'event_tickets_add_to_cart'])->name('event_tickets.add_to_cart');
 
     Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+    Route::post('/cart/remove', [CartController::class, 'cart_remove'])->name('cart.remove');
     Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.checkout');
 });

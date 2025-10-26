@@ -194,6 +194,23 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll("form").forEach(function(form) {
+                form.addEventListener("submit", function() {
+                    let btn = form.querySelector("[type=submit]");
+                    if (btn) {
+                        btn.disabled = true;
+                        btn.innerHTML = `
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Loading...
+                `;
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
