@@ -69,7 +69,7 @@
 
         </div>
     </div>
-    {{-- <div class="row mt-2">
+    <div class="row mt-2">
         <div class="col-lg-12">
             <table id="example" class="table">
                 <thead>
@@ -168,7 +168,7 @@
                 </tbody>
             </table>
         </div>
-    </div> --}}
+    </div>
     <script>
     new DataTable('#example');
     $(function() {
