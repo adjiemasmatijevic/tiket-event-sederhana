@@ -36,7 +36,7 @@ class DashboardController extends Controller
         $totalRevenue = Transaction::where('status', 'success')
             ->sum('amount_total');
 
-        $net = $totalRevenue - ($totalRevenue * 0.05);
+        $net = ceil($totalRevenue - ($totalRevenue * 0.05));
 
 
         $totalUsers = User::where('role', 'user')->count();
