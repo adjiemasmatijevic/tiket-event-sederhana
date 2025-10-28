@@ -46,13 +46,13 @@
             @if ($event->tickets->count() > 1)
             <div class="dz-review-meta mb-3">
                 <h4 class="price">
-                    Rp {{ number_format($event->tickets()->min('price'), 0, ',', '.') }} - Rp {{ number_format($event->tickets()->max('price'), 0, ',', '.') }}
+                    Rp. {{ number_format($event->tickets()->min('price'), 0, ',', '.') }} - Rp. {{ number_format($event->tickets()->max('price'), 0, ',', '.') }}
                 </h4>
             </div>
             @else
             <div class="dz-review-meta mb-3">
                 <h4 class="price">
-                    Rp {{ number_format($event->tickets()->first()->price, 0, ',', '.') }}
+                    Rp. {{ number_format($event->tickets()->first()->price, 0, ',', '.') }}
                 </h4>
             </div>
             @endif
@@ -92,7 +92,7 @@
                             <option value="" disabled selected>-- Select Ticket --</option>
                             @foreach($event->tickets as $ticket)
                             <option value="{{ $ticket->id }}">
-                                {{ $ticket->name }} (Rp {{ number_format($ticket->price, 0, ',', '.') }})
+                                {{ $ticket->name }} (Rp. {{ number_format($ticket->price, 0, ',', '.') }})
                             </option>
                             @endforeach
                         </select>

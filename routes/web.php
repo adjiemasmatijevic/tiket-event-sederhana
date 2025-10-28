@@ -83,8 +83,6 @@ Route::middleware(['role:user'])->group(function () {
     Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.checkout');
 
     Route::get('/transactions', [TransactionController::class, 'transactions'])->name('transactions');
-    Route::get('/transactions/data', [TransactionController::class, 'transactions_data'])->name('transactions.data');
-    Route::post('/transactions/cancel', [TransactionController::class, 'transactions_cancel'])->name('transactions.cancel');
 
     Route::get('/tickets/my-tickets', [TicketController::class, 'my_tickets'])->name('tickets.my_tickets');
     Route::get('/tickets/my-tickets/data', [TicketController::class, 'my_tickets_data'])->name('tickets.my_tickets_data');

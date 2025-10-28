@@ -20,53 +20,6 @@
                 {{ session('error') }}
             </div>
             @endif
-
-            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-primary" id="DeleteModalLabel">Cancel Transaction</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
-                        <form action="{{ route('transactions.cancel') }}" method="post">
-                            <div class="modal-body text-dark">
-                                @csrf
-                                <input type="hidden" id="delete_id" name="id">
-                                <p>Are you sure you want to cancel this transaction?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn mb-2 btn-secondary"
-                                    data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn mb-2 btn-danger">Cancel</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="transaction-table" class="table datatables" style="width:100%">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>NO</th>
-                                    <th>CREATED AT</th>
-                                    <th>AMOUNT TOTAL</th>
-                                    <th>STATUS</th>
-                                    <th>EXPIRED AT</th>
-                                    <th>ACTION</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
     <div class="row mt-2">
@@ -80,80 +33,49 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($transactions as $transaction)
                     <tr>
                         <td style="padding:0">
                             <div class="accordion" id="accordionPanelsStayOpenExample">
                                 <div class="accordion-item bg-white shadow rounded">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse-1"
-                                            aria-expanded="false" aria-controls="panelsStayOpen-collapse-1">
-                                            <h6 style="font-size:14px; margin-bottom:0px">#TRX_ID trim (8 Digit awal)
+                                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse-{{ $loop->iteration }}"
+                                            aria-expanded="false" aria-controls="panelsStayOpen-collapse-{{ $loop->iteration }}">
+                                            <h6 style="font-size:14px; margin-bottom:0px">{{ substr(strtoupper($transaction->id), 0, 8) }}
                                             </h6><br>
-
                                         </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapse-1" class="accordion-collapse collapse">
+                                    <div id="panelsStayOpen-collapse-{{ $loop->iteration }}" class="accordion-collapse collapse">
                                         <div class="accordion-body">
                                             <ul class="dz-list message-list" style="margin-bottom: -20px;">
                                                 <li>
-                                                    <a href="chat.html">
+                                                    <a href="https://payment.talangdigital.com/transaction-detail/{{ $transaction->tdi_pay_id }}" target="_blank">
                                                         <div class="media-content">
                                                             <div>
-                                                                <h6 class="name">Rp102.500</h6>
+                                                                <h6 class="name">Rp. {{ number_format($transaction->amount_total, 0, ',', '.') }}</h6>
                                                                 <p class="my-1">
-                                                                    <b>CREATED AT :</b> 2025-10-26 23:26:37 <br>
-                                                                    <b>EXPIRED AT :</b> 2025-10-27 23:26:37 <br>
-                                                                    <b>STATUS :</b> Pending <br>
+                                                                    <b>CREATED AT :</b> {{ \Carbon\Carbon::parse($transaction->created_at)->format('D, d M Y \a\t H:i') }} <br>
+                                                                    <b>EXPIRED AT :</b> {{ \Carbon\Carbon::parse($transaction->expired_at)->format('D, d M Y \a\t H:i') }} <br>
+                                                                    <b>STATUS :</b> {{ $transaction->status }} <br>
                                                                 </p>
                                                             </div>
                                                             <div class="left-content">
+                                                                @if($transaction->status == 'success')
+                                                                <div class="seen-btn active mt-2 dz-flex-box">
+                                                                    <i class="icon feather icon-check"></i>
+                                                                </div>
+                                                                @elseif($transaction->status == 'pending')
                                                                 <div class="seen-btn mt-2 dz-flex-box"
                                                                     style="background: #FFD700; border-color: #FFD700;">
                                                                     <i class="icon feather icon-clock text-dark"></i>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:0">
-                            <div class="accordion" id="accordionPanelsStayOpenExample">
-                                <div class="accordion-item bg-white shadow rounded">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse-2"
-                                            aria-expanded="false" aria-controls="panelsStayOpen-collapse-2">
-                                            <h6 style="font-size:14px; margin-bottom:0px">#TRX_ID trim (8 Digit awal)
-                                            </h6><br>
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapse-2" class="accordion-collapse collapse">
-                                        <div class="accordion-body">
-                                            <ul class="dz-list message-list" style="margin-bottom: -30px;">
-                                                <li>
-                                                    <a href="chat.html">
-                                                        <div class="media-content">
-                                                            <div>
-                                                                <h6 class="name">Rp52.500</h6>
-                                                                <p class="my-1">
-                                                                    <b>CREATED AT :</b> 2025-10-26 23:26:37 <br>
-                                                                    <b>EXPIRED AT :</b> 2025-10-27 23:26:37 <br>
-                                                                    <b>STATUS :</b> Success <br>
-                                                                </p>
-                                                            </div>
-                                                            <div class="left-content">
-                                                                <div class="seen-btn active mt-2 dz-flex-box">
-                                                                    <i class="icon feather icon-check"></i>
+                                                                @elseif($transaction->status == 'canceled')
+                                                                <div class="seen-btn mt-2 dz-flex-box"
+                                                                    style="background: #FF4500; border-color: #FF4500;">
+                                                                    <i class="icon feather icon-x text-white"></i>
                                                                 </div>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </a>
@@ -165,57 +87,13 @@
                             </div>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
     <script>
-    new DataTable('#example');
-    $(function() {
-        $('#transaction-table').DataTable({
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            ajax: "{{ route('transactions.data') }}",
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'created_at',
-                    name: 'created_at'
-                },
-                {
-                    data: 'amount_total',
-                    name: 'amount_total'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'expired_at',
-                    name: 'expired_at'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ],
-            order: [
-                [3, 'asc']
-            ]
-        });
-    });
-
-    $(document).on('click', '[data-bs-target="#DeleteModal"]', function() {
-        let id = $(this).data('bs-id');
-        $('#delete_id').val(id);
-    });
+        new DataTable('#example');
     </script>
 </div>
 @endsection

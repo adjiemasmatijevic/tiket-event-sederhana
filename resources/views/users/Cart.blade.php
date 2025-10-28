@@ -41,7 +41,7 @@ $totalFull = $totalPrice + $adminFee;
             <span class="font-12 brand-tag">{{ $item->ticket->name }}</span>
 
             <div class="cart-footer" style="display: flex; justify-content: space-between; align-items: center;">
-                <h6 class="price mb-0">Rp {{ number_format($item->ticket->price, 0, ',', '.') }}</h6>
+                <h6 class="price mb-0">Rp. {{ number_format($item->ticket->price, 0, ',', '.') }}</h6>
                 <form action="{{ route('cart.remove') }}" method="POST" style="margin: 0;">
                     @csrf
                     <input type="hidden" name="cart_id" value="{{ $item->id }}">
@@ -66,13 +66,13 @@ $totalFull = $totalPrice + $adminFee;
 <div class="fixed-bottom bg-light p-3 shadow-lg" style="border-top: 1px solid #dee2e6;">
     <div class="container d-flex justify-content-between align-items-center">
         <div>
-            <h4 class="fw-bold mb-0">Rp {{ number_format($totalFull, 0, ',', '.') }}</h4>
+            <h4 class="fw-bold mb-0">Rp. {{ number_format($totalFull, 0, ',', '.') }}</h4>
             <div class="lh-1">
                 <small class="text-muted d-block">
-                    Total Product: Rp {{ number_format($totalPrice, 0, ',', '.') }}
+                    Total Product: Rp. {{ number_format($totalPrice, 0, ',', '.') }}
                 </small>
                 <small class="text-muted d-block">
-                    Admin Fee: Rp {{ number_format($adminFee, 0, ',', '.') }}
+                    Admin Fee: Rp. {{ number_format($adminFee, 0, ',', '.') }}
                 </small>
             </div>
         </div>
@@ -91,12 +91,12 @@ $totalFull = $totalPrice + $adminFee;
             </div>
             <div class="modal-body text-center">
                 <p class="fs-5">You are about to proceed to checkout with the following details:</p>
-                <h2 class="text-center fw-bold text-success mb-2">Rp {{ number_format($totalFull, 0, ',', '.') }}</h2>
+                <h2 class="text-center fw-bold text-success mb-2">Rp. {{ number_format($totalFull, 0, ',', '.') }}</h2>
                 <p class="text-muted mb-1" style="font-size: 0.9rem;">
-                    Total Product: Rp {{ number_format($totalPrice, 0, ',', '.') }}
+                    Total Product: Rp. {{ number_format($totalPrice, 0, ',', '.') }}
                 </p>
                 <p class="text-muted mb-3" style="font-size: 0.9rem;">
-                    Admin Fee: Rp {{ number_format($adminFee, 0, ',', '.') }}
+                    Admin Fee: Rp. {{ number_format($adminFee, 0, ',', '.') }}
                 </p>
                 <p class="text-muted">Are you sure you want to continue?</p>
             </div>
