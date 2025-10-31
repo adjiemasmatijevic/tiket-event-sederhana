@@ -40,6 +40,7 @@ public function transactionAll()
                 'trx_id' => $t->id,
                 'tdi_pay_id' => $t->tdi_pay_id,
                 'user_name' => $t->user->name ?? '-',
+                'phone' => $t->user->phone ?? '-',
                 'amount_total' => number_format($t->amount_total, 0, ',', '.'),
                 'status' => ucfirst($t->status),
                 'expired_at' => $t->expired_at 
