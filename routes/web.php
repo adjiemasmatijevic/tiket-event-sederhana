@@ -62,6 +62,10 @@ Route::middleware(['role:admin'])->group(function () {
     Route::post('/tickets/update', [TicketController::class, 'tickets_update'])->name('tickets.update');
     Route::post('/tickets/delete', [TicketController::class, 'tickets_delete'])->name('tickets.delete');
 
+    Route::get('/admin/transactions', [TransactionController::class, 'adminTransactions'])->name('admin.transactions');    Route::get('/transactions/data', [TransactionController::class, 'adminTransactionsData'])->name('admin.transactions.data');
+    Route::get('/transactions/data/{id}', [TransactionController::class, 'adminTransactionsDataById'])->name('admin.transactions.data.id');
+    Route::get('admin/transactions/all', [TransactionController::class, 'transactionAll'])->name('admin.transactions.all'); // 🔹 baru
+
     Route::get('/users-management', [UserController::class, 'users'])->name('users.management');
     Route::get('/users-management/data', [UserController::class, 'users_data'])->name('users.management.data');
     Route::post('/users-management/update-role', [UserController::class, 'users_update_role'])->name('users.management.update.role');
