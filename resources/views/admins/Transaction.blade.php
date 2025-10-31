@@ -49,7 +49,18 @@ $(document).ready(function() {
                         if (!text) return '';
                         return text.toString().toUpperCase().substring(0, length);
                     };
+                    const formatPhone = (phone) => {
+                            if (!phone) return '';
+                            phone = phone.toString().trim();
+                            if (phone.startsWith('0')) {
+                                return '62' + phone.substring(1);
+                            } else if (phone.startsWith('+62')) {
+                                return phone.replace('+', '');
+                            }
+                            return phone;
+                        };
 
+                    const phoneNumber = formatPhone(t.phone);
                     // logika tombol berdasarkan status
                     if (t.status.toLowerCase() === 'success') {
                         btnClass = 'btn-success';
@@ -62,7 +73,7 @@ $(document).ready(function() {
                             `Invoice Anda #${formatText(t.trx_id, 8)} sebesar Rp${t.amount_total}. ` +
                             `Silakan selesaikan pembayaran melalui https://ticket.spasicreative.space/transactions`
                         );
-                        btnHref = `https://wa.me/${t.phone}?text=${msg}`;
+                        btnHref = `https://wa.me/${phoneNumber}?text=${msg}`;
                     } else if (t.status.toLowerCase() === 'canceled') {
                         btnClass = 'btn-danger';
                         btnText = 'Canceled';
