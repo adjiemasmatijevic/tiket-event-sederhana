@@ -12,7 +12,7 @@
     <h3 class="fw-bold mb-3">transaction</h3>
 
     <div class="table-responsive">
-        <table class="table table-bordered align-middle" id="transactionTable">
+        <table class="table align-middle" id="transactionTable">
             <thead class="table-light">
                 <tr>
                     <th>No</th>
