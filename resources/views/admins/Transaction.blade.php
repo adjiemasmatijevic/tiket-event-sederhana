@@ -34,7 +34,7 @@
 <script>
 $(document).ready(function() {
     $.ajax({
-        url: "{{ route('admin.transactions.all') }}",
+        url: "{{ route('trx.all') }}",
         method: "GET",
         success: function(data) {
             let rows = '';
@@ -54,11 +54,7 @@ $(document).ready(function() {
                             <td><span class="fw-semibold">${t.tdi_pay_id}</span></td>
                             <td>${t.user_name}</td>
                             <td>IDR ${t.amount_total}</td>
-<td>
-    <span class="badge bg-${badgeClass} text-white px-3 py-2 fs-6 fw-semibold text-uppercase shadow-sm">
-        ${t.status}
-    </span>
-</td>
+                            <td>s
 
                             <td>${t.expired_at}</td>
                             <td>${t.created_at}</td>
