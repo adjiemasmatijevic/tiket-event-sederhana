@@ -138,14 +138,6 @@
                 </ul>
                 <ul class="navbar-nav flex-fill w-100 mb-2">
                     <li class="nav-item w-100">
-                        <a class="nav-link d-flex align-items-center {{ Route::currentRouteName() == 'admin.transactions' ? 'bg-primary rounded text-white font-weight-bold' : '' }}" href="{{ route('admin.transactions') }}">
-                            <i class="fe fe-credit-card fe-16"></i>
-                            <span class="ml-3 item-text">Transaction</span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav flex-fill w-100 mb-2">
-                    <li class="nav-item w-100">
                         <a class="nav-link d-flex align-items-center {{ Route::currentRouteName() == 'users.management' ? 'bg-primary rounded text-white font-weight-bold' : '' }}" href="{{ route('users.management') }}">
                             <i class="fe fe-users fe-16"></i>
                             <span class="ml-3 item-text">Users</span>
