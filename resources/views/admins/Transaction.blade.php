@@ -3,20 +3,16 @@
 @section('app_name', config('app.name'))
 @section('title', 'Transaction')
 @section('content')
-<div class="row">
-    <div class="col-12 my-4">
-
-    </div>
-</div>
-<div class="container mt-4">
-    <h3 class="fw-bold mb-3">transaction</h3>
+<div class="my-4">
+    <h2 class="h3 mb-1 text-primary">Transactions</h2>
+    <p class="mb-3 text-dark">All Transactions</p>
 
     <div class="table-responsive">
-        <table class="table align-middle" id="transactionTable">
-            <thead class="table-light">
+        <table class="table table-bordered table-striped datatables" id="transactionTable">
+            <thead class="thead-light">
                 <tr>
                     <th>No</th>
-                    <th>TDI Pay ID</th>
+                    <th>Invoice</th>
                     <th>Nama User</th>
                     <th>Total (IDR)</th>
                     <th>Status</th>
@@ -47,15 +43,21 @@ $(document).ready(function() {
                     if (t.status.toLowerCase() === 'success') badgeClass = 'success';
                     else if (t.status.toLowerCase() === 'pending') badgeClass = 'warning';
                     else if (t.status.toLowerCase() === 'canceled') badgeClass = 'danger';
-
+                    const formatText = (text, length = 20) => {
+                            if (!text) return '';
+                            return text.toString().toUpperCase().substring(0, length);
+                        };
                     rows += `
                         <tr>
                             <td>${t.no}</td>
-                            <td><span class="fw-semibold">${t.tdi_pay_id}</span></td>
+                            <td><span class="fw-semibold">#${formatText(t.trx_id, 8)}</span></td>
                             <td>${t.user_name}</td>
                             <td>IDR ${t.amount_total}</td>
-                            <td>s
-
+                            <td>
+                                <span class="badge bg-${badgeClass} text-white px-3 py-2 fs-6 fw-semibold text-uppercase shadow-sm">
+                                    ${t.status}
+                                </span>
+                            </td>
                             <td>${t.expired_at}</td>
                             <td>${t.created_at}</td>
                         </tr>

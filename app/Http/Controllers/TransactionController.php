@@ -37,6 +37,7 @@ public function transactionAll()
         ->map(function ($t, $i) {
             return [
                 'no' => $i + 1,
+                'trx_id' => $t->id,
                 'tdi_pay_id' => $t->tdi_pay_id,
                 'user_name' => $t->user->name ?? '-',
                 'amount_total' => number_format($t->amount_total, 0, ',', '.'),

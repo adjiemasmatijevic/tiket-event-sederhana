@@ -6,7 +6,7 @@
 @section('content')
 <div class="row">
     <div class="col-12 my-4">
-        <h2 class="h3 mb-1 text-primary">User Checkers</h2>
+        <h2 class="h3 mb-1 text-primary">Users</h2>
         <p class="mb-3 text-dark">Manage checker and user roles</p>
         @if (session('success'))
         <div class="mb-3 alert alert-success">
