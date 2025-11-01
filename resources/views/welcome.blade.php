@@ -47,10 +47,10 @@
                         <h6 class="title">
                             <a href="{{ route('event_tickets', $event->id) }}">{{ $event->name }}</a>
                         </h6>
-                        <h6 class="price">Rp50.000<del>Rp65.000</del></h6>
+                        <h6 class="price">Rp65.000</h6>
                     </div>
                     <div class="product-tag">
-                        <span class="badge badge-secondary">23% off</span>
+                        <span class="badge badge-secondary">Reguler</span>
                     </div>
                 </div>
             </a>
