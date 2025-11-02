@@ -235,4 +235,55 @@ class OTSController extends Controller
 
         return back()->with('success', 'OTS created successfully');
     }
+
+    public function ticket_fisik(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:64',
+            'phone' => 'required|string|max:20',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->with('error', $validator->errors()->first())
+                ->withInput();
+        }
+
+        try {
+            $ots = OTS::create([
+                'name' => $request->name,
+                'phone' => $request->phone,
+            ]);
+
+            $user_ots = User::where('role', 'ots')->first();
+
+            if (!$user_ots) {
+                return back()->with('error', 'OTS user not found');
+            }
+
+            $cart = new Cart();
+            $cart->user_id = $user_ots->id;
+            $cart->ticket_id = Ticket::first()->id;
+            $cart->ots_id = $ots->id;
+            $cart->status = 'checkout';
+            $cart->save();
+
+            $transaction = Transaction::create([
+                'user_id' => $user_ots->id,
+                'tdi_pay_id' => Str::uuid(),
+                'amount_total' => 50000,
+                'status' => 'success',
+                'category' => 'cash',
+                'expired_at' => now()->addDays(1),
+            ]);
+
+            $cart->transaction_id = $transaction->id;
+            $cart->save();
+        } catch (Exception $e) {
+            Log::error('Failed to create ots: ' . $e->getMessage());
+            return back()->with('error', 'Failed to create physical ticket')->withInput();
+        }
+
+        return back()->with('success', 'Physical ticket created successfully');
+    }
 }

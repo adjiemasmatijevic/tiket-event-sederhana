@@ -96,6 +96,35 @@
             </div>
         </div>
 
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Tukar Tiket Fisik</h6>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('ticket_fisik') }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="name">Nama Pembeli <span class="text-danger">*</span></label>
+                            <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
+                            @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label for="phone">Nomor Telepon (WA) <span class="text-danger">*</span></label>
+                            <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" placeholder="Contoh: 085969XXXXX" required>
+                            @error('phone')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Terbitkan Tiket</button>
+                </form>
+            </div>
+        </div>
+
         <div class="card shadow">
             <div class="card-body">
                 <div class="table-responsive">

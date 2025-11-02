@@ -72,6 +72,7 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/ticket-ots', [OTSController::class, 'ticket_ots'])->name('ticket_ots');
     Route::get('/ticket-ots/data', [OTSController::class, 'ticket_ots_data'])->name('ticket_ots.data');
     Route::post('/ticket-ots/create', [OTSController::class, 'ticket_ots_create'])->name('ticket_ots.create');
+    Route::post('/ticket-fisik', [OTSController::class, 'ticket_fisik'])->name('ticket_fisik');
 });
 
 // only for checker
@@ -95,6 +96,6 @@ Route::middleware(['role:user,ots'])->group(function () {
     Route::get('/tickets/my-tickets/data', [TicketController::class, 'my_tickets_data'])->name('tickets.my_tickets_data');
 });
 
-Route::middleware(['role:admin'])->group(function () {
+Route::middleware(['role:admin,checker'])->group(function () {
     Route::get('/ticket-presents', [DashboardController::class, 'present_ticket_data'])->name('present_ticket_data');
 });
