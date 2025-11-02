@@ -168,7 +168,7 @@
     $formatted_date = $start_time->isoFormat('dddd, D MMMM Y');
     $formatted_time = $start_time->isoFormat('HH:mm') . ' - ' . $end_time->isoFormat('HH:mm') . ' WIB';
 
-    $presence_status_text = $Tickets->presence == 1 ? 'SUDAH DIGUNAKAN' : 'BELUM DIGUNAKAN';
+    $presence_status_text = $Tickets->presence == 1 ? 'ATTEND' : 'NOT ATTEND';
     $presence_class = $Tickets->presence == 1 ? 'used' : 'unused';
 
     $qr_data = $Tickets->id_tiket;
@@ -237,9 +237,11 @@
             </div>
 
             <div class="col-12 col-md-5 qr-code-section position-relative">
+                @if ($presence_status_text == 'ATTEND')
                 <span class="presence-tag {{ $presence_class }}">
-                    {{ $presence_status_text }}
+                    <span class="fw-bold">ATTEND</span>
                 </span>
+                @endif
                 <img src="{{ $qr_url }}" alt="QR Code Tiket" class="img-fluid bg-white rounded">
             </div>
 
