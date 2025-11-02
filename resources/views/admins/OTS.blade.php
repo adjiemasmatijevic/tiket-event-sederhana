@@ -65,7 +65,7 @@
                                     data-total="{{ $ticket->total }}"
                                     {{ $ticket->total <= 0 ? 'disabled' : '' }}
                                     {{ old('ticket_id') == $ticket->id ? 'selected' : '' }}>
-                                    {{ $ticket->event_name }} - {{ $ticket->name }} (Harga: {{ number_format($ticket->price, 0, ',', '.') }} | Sisa: {{ $ticket->total }})
+                                    {{ $ticket->event_name }} - {{ $ticket->name }} (Harga: {{ number_format($ticket->price, 0, ',', '.') }})
                                     {{ $ticket->total <= 0 ? ' (HABIS)' : '' }}
                                 </option>
                                 @endforeach

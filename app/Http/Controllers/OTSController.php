@@ -215,6 +215,7 @@ class OTSController extends Controller
                     'tdi_pay_id' => $response['id'],
                     'amount_total' => $totalFull,
                     'status' => 'pending',
+                    'category' => 'payment gateway',
                     'expired_at' => now()->addDays(1),
                 ]);
 
