@@ -229,6 +229,10 @@
                     <p class="mt-4 small text-muted">
                         Tunjukkan kode QR ini untuk verifikasi saat masuk ke lokasi acara.
                     </p>
+
+                    <div class="detail-item">
+                        <span>{{ $Tickets->id_tiket }}</span>
+                    </div>
                 </div>
             </div>
 
@@ -236,7 +240,6 @@
                 <span class="presence-tag {{ $presence_class }}">
                     {{ $presence_status_text }}
                 </span>
-
                 <img src="{{ $qr_url }}" alt="QR Code Tiket" class="img-fluid bg-white rounded">
             </div>
 
