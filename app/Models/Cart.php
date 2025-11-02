@@ -26,4 +26,9 @@ class Cart extends Model
     {
         return $this->belongsTo(Transaction::class);
     }
+
+    public function ots()
+    {
+        return $this->belongsTo(Ots::class);
+    }
 }

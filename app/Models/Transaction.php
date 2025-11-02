@@ -10,7 +10,7 @@ class Transaction extends Model
     use HasUuids;
 
     protected $table = 'transactions';
-    protected $fillable = ['user_id', 'tdi_pay_id', 'amount_total', 'status', 'expired_at'];
+    protected $fillable = ['user_id', 'tdi_pay_id', 'amount_total', 'status', 'category', 'expired_at'];
 
     public function user()
     {

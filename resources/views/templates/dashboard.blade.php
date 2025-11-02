@@ -136,6 +136,16 @@
                         </a>
                     </li>
                 </ul>
+
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
+                        <a class="nav-link d-flex align-items-center {{ Route::currentRouteName() == 'ticket_ots' ? 'bg-primary rounded text-white font-weight-bold' : '' }}" href="{{ route('ticket_ots') }}">
+                            <i class="fe fe-credit-card fe-16"></i>
+                            <span class="ml-3 item-text">Ticket OTS</span>
+                        </a>
+                    </li>
+                </ul>
+
                 <ul class="navbar-nav flex-fill w-100 mb-2">
                     <li class="nav-item w-100">
                         <a class="nav-link d-flex align-items-center {{ Route::currentRouteName() == 'trx' ? 'bg-primary rounded text-white font-weight-bold' : '' }}" href="{{ route('trx') }}">
@@ -152,14 +162,6 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="navbar-nav flex-fill w-100 mb-2">
-                    <li class="nav-item w-100">
-                        <a class="nav-link d-flex align-items-center" href="{{ route('logout') }}">
-                            <i class="fe fe-log-out fe-16"></i>
-                            <span class="ml-3 item-text">Logout</span>
-                        </a>
-                    </li>
-                </ul>
                 @endif
 
                 @if(Auth::user()->role === 'checker')
@@ -172,6 +174,15 @@
                     </li>
                 </ul>
                 @endif
+
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
+                        <a class="nav-link d-flex align-items-center" href="{{ route('logout') }}">
+                            <i class="fe fe-log-out fe-16"></i>
+                            <span class="ml-3 item-text">Logout</span>
+                        </a>
+                    </li>
+                </ul>
             </nav>
         </aside>
         <main role="main" class="main-content">
