@@ -147,5 +147,83 @@
             </div>
         </div>
     </div>
+    <div class="col-md-6 col-xl-3 mb-4">
+        <div class="card shadow border-0">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-3 text-center">
+                        <span class="circle circle-sm bg-info-light">
+                            <i class="fe fe-activity fe-16 text-white"></i>
+                        </span>
+                    </div>
+                    <div class="col pr-0">
+                        <p class="small text-dark mb-0">Tiket Hadir</p>
+                        <span class="h3 mb-0">{{ $ticketsPresent }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <h5 class="card-title">Tiket Hadir</h5>
+        <div class="table-responsive">
+            <table id="ticket-table" class="table table-bordered table-striped datatables" style="width:100%">
+                <thead class="thead-light">
+                    <tr>
+                        <th>NO</th>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>EVENT</th>
+                        <th>TIKET</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('#ticket-table').DataTable({
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            ajax: "{{ route('present_ticket_data') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'id_tiket',
+                    name: 'carts.id',
+                    title: 'ID'
+                },
+                {
+                    data: 'user_name',
+                    name: 'users.name',
+                    title: 'NAME'
+                },
+                {
+                    data: 'event_name',
+                    name: 'events.name',
+                    title: 'EVENT'
+                },
+                {
+                    data: 'ticket_name',
+                    name: 'tickets.name',
+                    title: 'TIKET'
+                },
+            ],
+            order: [
+                [3, 'asc']
+            ]
+        });
+    });
+</script>
 @endsection

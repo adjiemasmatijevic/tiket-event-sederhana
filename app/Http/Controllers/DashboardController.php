@@ -8,6 +8,7 @@ use App\Models\Ticket;
 use App\Models\User;
 use App\Models\Cart;
 use App\Models\Transaction;
+use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -44,6 +45,11 @@ class DashboardController extends Controller
         $totalUsers = User::where('role', 'user')->count();
         $totalCheckers = User::where('role', 'checker')->count();
 
+        $ticketsPresent = Cart::where('presence', 1)->whereHas('transaction', function ($query) {
+            $query->where('status', 'success');
+        })
+            ->count();
+
 
         return view('admins.Dashboard', compact(
             'totalEvents',
@@ -54,13 +60,18 @@ class DashboardController extends Controller
             'totalCheckers',
             'totalRevenue',
             'net',
-            'feeAdmin'
+            'feeAdmin',
+            'ticketsPresent'
         ));
     }
 
     private function checker()
     {
-        return view('checkers.Dashboard');
+        $ticketsPresent = Cart::where('presence', 1)->whereHas('transaction', function ($query) {
+            $query->where('status', 'success');
+        })
+            ->count();
+        return view('checkers.Dashboard', compact('ticketsPresent'));
     }
 
     private function user()
@@ -69,5 +80,27 @@ class DashboardController extends Controller
             ->orderBy('time_start', 'asc')
             ->get();
         return view('users.Dashboard', compact('upcomingEvents'));
+    }
+
+    public function present_ticket_data()
+    {
+        $query = Cart::query()
+            ->join('transactions', 'transactions.id', '=', 'carts.transaction_id')
+            ->join('tickets', 'tickets.id', '=', 'carts.ticket_id')
+            ->join('events', 'events.id', '=', 'tickets.event_id')
+            ->join('users', 'users.id', '=', 'carts.user_id')
+            ->where('carts.presence', 1)
+            ->where('transactions.status', 'success')
+            ->select([
+                'carts.id AS id_tiket',
+                'users.name AS user_name',
+                'events.name AS event_name',
+                'tickets.name AS ticket_name',
+            ])
+            ->orderBy('carts.updated_at', 'desc');
+
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->make(true);
     }
 }

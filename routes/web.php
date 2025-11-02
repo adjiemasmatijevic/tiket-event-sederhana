@@ -13,7 +13,7 @@ use App\Http\Controllers\CheckerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OTSController;
 use App\Http\Controllers\TransactionController;
-
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // fallback route
 Route::fallback(function () {
@@ -93,4 +93,8 @@ Route::middleware(['role:user,ots'])->group(function () {
 
     Route::get('/tickets/my-tickets', [TicketController::class, 'my_tickets'])->name('tickets.my_tickets');
     Route::get('/tickets/my-tickets/data', [TicketController::class, 'my_tickets_data'])->name('tickets.my_tickets_data');
+});
+
+Route::middleware(['role:admin'])->group(function () {
+    Route::get('/ticket-presents', [DashboardController::class, 'present_ticket_data'])->name('present_ticket_data');
 });
