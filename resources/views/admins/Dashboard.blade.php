@@ -130,6 +130,22 @@
             </div>
         </div>
     </div>
-    
+    <div class="col-md-6 col-xl-3 mb-4">
+        <div class="card shadow border-0">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-3 text-center">
+                        <span class="circle circle-sm bg-info-light">
+                            <i class="fe fe-dollar-sign fe-16 text-white"></i>
+                        </span>
+                    </div>
+                    <div class="col pr-0">
+                        <p class="small text-dark mb-0">Fee Admin</p>
+                        <span class="h3 mb-0">IDR {{ number_format($feeAdmin ?? 0, 0, ',', '.') }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
