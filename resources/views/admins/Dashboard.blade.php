@@ -79,7 +79,17 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-xl-3 mb-4">
+    <div class="col-md-12 col-xl-12 mb-3">
+        <div class="form-group mb-3">
+            <label for="example-select">Event</label>
+            <select class="form-control" id="example-select">
+                <option>All Event</option>
+                <option>Event 1</option>
+                <option>Event 2</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-6 mb-4">
         <div class="card shadow border-0">
             <div class="card-body">
                 <div class="row align-items-center">
@@ -96,13 +106,30 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-xl-3 mb-4">
+    <div class="col-md-6 col-xl-6 mb-4">
         <div class="card shadow border-0">
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-3 text-center">
                         <span class="circle circle-sm bg-info-light">
-                            <i class="fe fe-dollar-sign fe-16 text-white"></i>
+                            <i class="fe fe-activity fe-16 text-white"></i>
+                        </span>
+                    </div>
+                    <div class="col pr-0">
+                        <p class="small text-dark mb-0">Ticket Checked</p>
+                        <span class="h3 mb-0">{{ $ticketsPresent }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-4 mb-4">
+        <div class="card shadow border-0">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-3 text-center">
+                        <span class="circle circle-sm bg-info-light">
+                            <i class="fe fe-trending-up fe-16 text-white"></i>
                         </span>
                     </div>
                     <div class="col pr-0">
@@ -113,13 +140,13 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-xl-3 mb-4">
+    <div class="col-md-6 col-xl-4 mb-4">
         <div class="card shadow border-0">
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-3 text-center">
                         <span class="circle circle-sm bg-info-light">
-                            <i class="fe fe-dollar-sign fe-16 text-white"></i>
+                            <i class="fe fe-trending-up fe-16 text-white"></i>
                         </span>
                     </div>
                     <div class="col pr-0">
@@ -130,13 +157,13 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-xl-3 mb-4">
+    <div class="col-md-6 col-xl-4 mb-4">
         <div class="card shadow border-0">
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-3 text-center">
                         <span class="circle circle-sm bg-info-light">
-                            <i class="fe fe-dollar-sign fe-16 text-white"></i>
+                            <i class="fe fe-trending-up fe-16 text-white"></i>
                         </span>
                     </div>
                     <div class="col pr-0">
@@ -147,28 +174,11 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-xl-3 mb-4">
-        <div class="card shadow border-0">
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-3 text-center">
-                        <span class="circle circle-sm bg-info-light">
-                            <i class="fe fe-activity fe-16 text-white"></i>
-                        </span>
-                    </div>
-                    <div class="col pr-0">
-                        <p class="small text-dark mb-0">Tiket Hadir</p>
-                        <span class="h3 mb-0">{{ $ticketsPresent }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="card shadow">
     <div class="card-body">
-        <h5 class="card-title">Tiket Hadir</h5>
+        <h5 class="card-title">Ticket Checked</h5>
         <div class="table-responsive">
             <table id="ticket-table" class="table table-bordered table-striped datatables" style="width:100%">
                 <thead class="thead-light">
