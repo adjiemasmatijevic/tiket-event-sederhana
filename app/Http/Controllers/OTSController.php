@@ -189,6 +189,7 @@ class OTSController extends Controller
                     'total' => $totalFull,
                     'fee' => $adminFee,
                     'payment' => 'QRIS',
+                    "expiry_minutes" => 15,
                 ];
 
                 $data['items'][$ticket->name] = [
@@ -216,7 +217,7 @@ class OTSController extends Controller
                     'amount_total' => $totalFull,
                     'status' => 'pending',
                     'category' => 'payment gateway',
-                    'expired_at' => now()->addDays(1),
+                    'expired_at' => now()->addMinutes(15),
                 ]);
 
                 $cart->transaction_id = $transaction->id;

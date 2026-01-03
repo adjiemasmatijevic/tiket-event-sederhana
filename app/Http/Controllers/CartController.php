@@ -52,6 +52,7 @@ class CartController extends Controller
             'total' => $totalFull,
             'fee' => $adminFee,
             'payment' => 'QRIS',
+            "expiry_minutes" => 15,
         ];
 
         foreach ($cartItems as $item) {
@@ -88,7 +89,7 @@ class CartController extends Controller
             'tdi_pay_id' => $response['id'],
             'amount_total' => $totalFull,
             'status' => 'pending',
-            'expired_at' => now()->addDays(1),
+            'expired_at' => now()->addMinutes(15),
         ]);
 
         foreach ($cartItems as $item) {
