@@ -82,11 +82,13 @@
     <div class="col-md-12 col-xl-12 mb-3">
         <div class="form-group mb-3">
             <label for="example-select">Event</label>
-            <select class="form-control" id="example-select">
-                <option>All Event</option>
-                <option>Event 1</option>
-                <option>Event 2</option>
+           <select class="form-control" id="eventSelect">
+                    <option value="">All Event</option>
+                    @foreach($events as $event)
+                        <option value="{{ $event->id }}">{{ $event->name }}</option>
+                    @endforeach
             </select>
+
         </div>
     </div>
     <div class="col-md-6 col-xl-6 mb-4">
@@ -100,7 +102,7 @@
                     </div>
                     <div class="col pr-0">
                         <p class="small text-dark mb-0">Tickets Sold</p>
-                        <span class="h3 mb-0">{{ $ticketsSold ?? 0 }}</span>
+                        <span id="ticketsSold" class="h3 mb-0">{{ $ticketsSold ?? 0 }}</span>
                     </div>
                 </div>
             </div>
@@ -116,8 +118,8 @@
                         </span>
                     </div>
                     <div class="col pr-0">
-                        <p class="small text-dark mb-0">Ticket Checked</p>
-                        <span class="h3 mb-0">{{ $ticketsPresent }}</span>
+                     <p class="small text-dark mb-0">Ticket Checked</p>
+                     <span class="h3 mb-0" id="ticketsChecked">{{ $ticketsPresent }}</span>
                     </div>
                 </div>
             </div>
@@ -134,7 +136,9 @@
                     </div>
                     <div class="col pr-0">
                         <p class="small text-dark mb-0">Gross Revenue</p>
-                        <span class="h3 mb-0">IDR {{ number_format($totalRevenue ?? 0, 0, ',', '.') }}</span>
+                        <span id="grossRevenue" class="h3 mb-0">
+                            IDR {{ number_format($totalRevenue ?? 0, 0, ',', '.') }}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -150,8 +154,10 @@
                         </span>
                     </div>
                     <div class="col pr-0">
-                        <p class="small text-dark mb-0">Net Revenue</p>
-                        <span class="h3 mb-0">IDR {{ number_format($net ?? 0, 0, ',', '.') }}</span>
+                       <p class="small text-dark mb-0">Net Revenue</p>
+                        <span id="netRevenue" class="h3 mb-0">
+                            IDR {{ number_format($net ?? 0, 0, ',', '.') }}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -168,14 +174,15 @@
                     </div>
                     <div class="col pr-0">
                         <p class="small text-dark mb-0">Fee Admin</p>
-                        <span class="h3 mb-0">IDR {{ number_format($feeAdmin ?? 0, 0, ',', '.') }}</span>
+                    <span id="feeAdmin" class="h3 mb-0">
+                        IDR {{ number_format($feeAdmin ?? 0, 0, ',', '.') }}
+                    </span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div class="card shadow">
     <div class="card-body">
         <h5 class="card-title">Ticket Checked</h5>
@@ -195,7 +202,6 @@
         </div>
     </div>
 </div>
-
 <script>
     $(function() {
         $('#ticket-table').DataTable({
@@ -235,5 +241,27 @@
             ]
         });
     });
+</script>
+<script>
+$('#eventSelect').on('change', function () {
+    let eventId = $(this).val();
+
+    $.ajax({
+        url: '/filter',
+        type: 'GET',
+        data: { event_id: eventId },
+        success: function (res) {
+            $('#ticketsSold').text(res.tickets_sold);
+            $('#ticketsChecked').text(res.tickets_checked);
+            $('#grossRevenue').text(res.gross_revenue);
+            $('#netRevenue').text(res.net_revenue);
+            $('#feeAdmin').text(res.fee_admin);
+        },
+        error: function (xhr) {
+            console.error(xhr.responseText);
+            alert('Gagal memuat data dashboard');
+        }
+    });
+});
 </script>
 @endsection

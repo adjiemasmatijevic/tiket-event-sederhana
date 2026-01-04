@@ -15,6 +15,7 @@ use App\Http\Controllers\OTSController;
 use App\Http\Controllers\TransactionController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
+
 // fallback route
 Route::fallback(function () {
     return redirect()->route('home');
@@ -73,6 +74,8 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/ticket-ots/data', [OTSController::class, 'ticket_ots_data'])->name('ticket_ots.data');
     Route::post('/ticket-ots/create', [OTSController::class, 'ticket_ots_create'])->name('ticket_ots.create');
     Route::post('/ticket-fisik', [OTSController::class, 'ticket_fisik'])->name('ticket_fisik');
+    Route::get('/filter', [DashboardController::class, 'filterDashboard']);
+
 });
 
 // only for checker

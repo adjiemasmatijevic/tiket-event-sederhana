@@ -10,6 +10,8 @@ use App\Models\Cart;
 use App\Models\Transaction;
 use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+
 
 class DashboardController extends Controller
 {
@@ -26,6 +28,8 @@ class DashboardController extends Controller
 
     private function admin()
     {
+        $events = Event::select('id', 'name')->get();
+
         $totalEvents = Event::count();
         $activeEvents = Event::where('status', 'active')->count();
         $totalTickets = Ticket::sum('total');
@@ -61,7 +65,8 @@ class DashboardController extends Controller
             'totalRevenue',
             'net',
             'feeAdmin',
-            'ticketsPresent'
+            'ticketsPresent',
+            'events'
         ));
     }
 
@@ -103,4 +108,31 @@ class DashboardController extends Controller
             ->addIndexColumn()
             ->make(true);
     }
+    //filtering dashboard by event 
+   public function filterDashboard(Request $request)
+{
+    $eventId = $request->event_id;
+    $query = Cart::query()
+        ->join('tickets', 'tickets.id', '=', 'carts.ticket_id')
+        ->join('transactions', 'transactions.id', '=', 'carts.transaction_id')
+        ->where('transactions.status', 'success');
+    if ($eventId) {
+        $query->where('tickets.event_id', $eventId);
+    }
+    $ticketsSold = (clone $query)->count();
+    $ticketsChecked = (clone $query)
+        ->where('carts.presence', 1)
+        ->count();
+    $grossRevenue = (clone $query)->sum('tickets.price');
+    $feeAdmin = $grossRevenue * 0.05;
+    $netRevenue = $grossRevenue - $feeAdmin;
+    return response()->json([
+        'tickets_sold'    => $ticketsSold,
+        'tickets_checked' => $ticketsChecked,
+        'gross_revenue'   => 'IDR ' . number_format($grossRevenue, 0, ',', '.'),
+        'net_revenue'     => 'IDR ' . number_format($netRevenue, 0, ',', '.'),
+        'fee_admin'       => 'IDR ' . number_format($feeAdmin, 0, ',', '.'),
+    ]);
+}
+
 }
