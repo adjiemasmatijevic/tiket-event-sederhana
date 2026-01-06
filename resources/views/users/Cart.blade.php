@@ -89,7 +89,14 @@ $totalFull = $totalPrice + $adminFee;
                 <h5 class="modal-title" id="checkoutConfirmModalLabel">Confirm Checkout</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form action="{{ route('cart.checkout') }}" method="POST" class="m-0">
             <div class="modal-body text-center">
+                <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Promotion Code" aria-label="Promotion Code" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="button">Use Code</button>
+                </div>
+                </div>
                 <p class="fs-5">You are about to proceed to checkout with the following details:</p>
                 <h2 class="text-center fw-bold text-success mb-2">Rp. {{ number_format($totalFull, 0, ',', '.') }}</h2>
                 <p class="text-muted mb-1" style="font-size: 0.9rem;">
@@ -102,12 +109,10 @@ $totalFull = $totalPrice + $adminFee;
             </div>
             <div class="modal-footer border-0 d-flex justify-content-center">
                 <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Cancel</button>
-
-                <form action="{{ route('cart.checkout') }}" method="POST" class="m-0">
-                    @csrf
-                    <button type="submit" class="btn btn-success btn-lg">Confirm & Continue</button>
-                </form>
+                @csrf
+                <button type="submit" class="btn btn-success btn-lg">Confirm & Continue</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
