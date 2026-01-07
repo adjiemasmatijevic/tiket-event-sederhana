@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Models\Cart;
 use App\Models\Transaction;
+use App\Models\Voucher;
 
 class CartController extends Controller
 {
@@ -19,12 +20,25 @@ class CartController extends Controller
     public function cart_remove(Request $request)
     {
         $cartItem = Cart::find($request->cart_id);
-        if ($cartItem && $cartItem->user_id == Auth::user()->id) {
-            $cartItem->delete();
-            return back()->with('success', 'Ticket removed from cart.');
+
+        if (! $cartItem || $cartItem->user_id !== Auth::id()) {
+            return back()->with('error', 'Unable to remove ticket.');
         }
-        return back()->with('error', 'Unable to remove ticket from cart.');
+
+        $cartItem->delete();
+
+        $remainingCart = Cart::where('user_id', Auth::id())
+            ->where('status', 'available')
+            ->count();
+        if ($remainingCart === 0 && session()->has('voucher_id')) {
+            $voucherId = session('voucher_id');
+            Voucher::where('id', $voucherId)->increment('limit');
+            session()->forget(['voucher_id', 'voucher_discount']);
+        }
+
+        return back()->with('success', 'Ticket removed from cart.');
     }
+
 
     public function cart_checkout()
     {
@@ -36,12 +50,13 @@ class CartController extends Controller
 
         $cartItems = Cart::where('user_id', Auth::user()->id)->where('status', 'available')->get();
 
-        $totalPrice = $cartItems->sum(function ($item) {
-            return $item->ticket->price;
-        });
+        $totalPrice = $cartItems->sum(fn($item) => $item->ticket->price);
 
+        $discount = session('voucher_discount', 0);
+        $subtotalAfterDiscount = max($totalPrice - $discount, 0);
         $adminFee = ceil($totalPrice * 0.05);
-        $totalFull = $totalPrice + $adminFee;
+        $totalFull = $subtotalAfterDiscount + $adminFee;
+
 
         $data = [
             'key' => $tdiApiKey,
@@ -97,6 +112,7 @@ class CartController extends Controller
             $item->transaction_id = $transaction->id;
             $item->save();
         }
+        session()->forget(['voucher_id', 'voucher_discount']);
 
         return redirect('https://payment.talangdigital.com/transaction-detail/' . $response['id']);
     }

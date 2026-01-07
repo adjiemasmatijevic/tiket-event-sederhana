@@ -13,6 +13,8 @@ use App\Http\Controllers\CheckerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OTSController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\VoucherController;
+
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
@@ -75,7 +77,6 @@ Route::middleware(['role:admin'])->group(function () {
     Route::post('/ticket-ots/create', [OTSController::class, 'ticket_ots_create'])->name('ticket_ots.create');
     Route::post('/ticket-fisik', [OTSController::class, 'ticket_fisik'])->name('ticket_fisik');
     Route::get('/filter', [DashboardController::class, 'filterDashboard']);
-
 });
 
 // only for checker
@@ -94,9 +95,10 @@ Route::middleware(['role:user,ots'])->group(function () {
     Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.checkout');
 
     Route::get('/transactions', [TransactionController::class, 'transactions'])->name('transactions');
-
     Route::get('/tickets/my-tickets', [TicketController::class, 'my_tickets'])->name('tickets.my_tickets');
     Route::get('/tickets/my-tickets/data', [TicketController::class, 'my_tickets_data'])->name('tickets.my_tickets_data');
+    //voucher apply route
+    Route::post('/voucher/apply', [VoucherController::class, 'apply'])->name('voucher.apply');
 });
 
 Route::middleware(['role:admin,checker'])->group(function () {
