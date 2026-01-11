@@ -12,18 +12,18 @@ class Transaction extends Model
     protected $table = 'transactions';
     protected $fillable = ['user_id', 'tdi_pay_id', 'amount_total', 'net', 'status', 'category', 'expired_at'];
 
-    protected static function boot()
-    {
-        parent::boot();
+    // protected static function boot()
+    // {
+    //     parent::boot();
 
-        static::creating(function ($transaction) {
-            if ($transaction->category === 'payment gateway') {
-                $transaction->net = round($transaction->amount_total / 1.05);
-            } else {
-                $transaction->net = $transaction->amount_total;
-            }
-        });
-    }
+    //     static::creating(function ($transaction) {
+    //         if ($transaction->category === 'payment gateway') {
+    //             $transaction->net = round($transaction->amount_total / 1.05);
+    //         } else {
+    //             $transaction->net = $transaction->amount_total;
+    //         }
+    //     });
+    // }
 
     public function user()
     {

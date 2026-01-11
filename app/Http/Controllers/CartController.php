@@ -56,7 +56,7 @@ class CartController extends Controller
         $subtotalAfterDiscount = max($totalPrice - $discount, 0);
         $adminFee = ceil($totalPrice * 0.05);
         $totalFull = $subtotalAfterDiscount + $adminFee;
-
+        $net = $subtotalAfterDiscount;
 
         $data = [
             'key' => $tdiApiKey,
@@ -103,6 +103,9 @@ class CartController extends Controller
             'user_id' => Auth::user()->id,
             'tdi_pay_id' => $response['id'],
             'amount_total' => $totalFull,
+            'discount' => $discount,
+            'admin_fee' => $adminFee,
+            'net' => $net,
             'status' => 'pending',
             'expired_at' => now()->addMinutes(15),
         ]);
