@@ -55,8 +55,10 @@ class CartController extends Controller
         $discount = session('voucher_discount', 0);
         $subtotalAfterDiscount = max($totalPrice - $discount, 0);
         $adminFee = ceil($totalPrice * 0.05);
-        $totalFull = $subtotalAfterDiscount + $adminFee;
-        $net = $subtotalAfterDiscount;
+        // $totalFull = $subtotalAfterDiscount + $adminFee;
+        // $net = $subtotalAfterDiscount;
+        $amountTotal = $subtotalAfterDiscount;
+        $net = $subtotalAfterDiscount + $adminFee;
 
         $data = [
             'key' => $tdiApiKey,
@@ -64,7 +66,7 @@ class CartController extends Controller
             'redirect_url' => route('tickets.my_tickets'),
             'notes' => 'Buy tickets - ' . Auth::user()->email,
             'items' => [],
-            'total' => $totalFull,
+            'total' => $net, //$totalFull
             'fee' => $adminFee,
             'payment' => 'QRIS',
             "expiry_minutes" => 15,
@@ -102,7 +104,7 @@ class CartController extends Controller
         $transaction = Transaction::create([
             'user_id' => Auth::user()->id,
             'tdi_pay_id' => $response['id'],
-            'amount_total' => $totalFull,
+            'amount_total' => $amountTotal, //$totalFull
             'discount' => $discount,
             'admin_fee' => $adminFee,
             'net' => $net,
