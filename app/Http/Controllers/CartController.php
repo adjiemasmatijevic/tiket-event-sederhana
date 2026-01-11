@@ -66,7 +66,7 @@ class CartController extends Controller
             'redirect_url' => route('tickets.my_tickets'),
             'notes' => 'Buy tickets - ' . Auth::user()->email,
             'items' => [],
-            'total' => $net, //$totalFull
+            'total' => $net, //$totalFull.
             'fee' => $adminFee,
             'payment' => 'QRIS',
             "expiry_minutes" => 15,
