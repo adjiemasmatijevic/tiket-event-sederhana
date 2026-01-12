@@ -11,9 +11,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckerController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\OTSController;
 use App\Http\Controllers\TransactionController;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // fallback route
 Route::fallback(function () {
