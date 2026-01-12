@@ -68,11 +68,6 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/users-management', [UserController::class, 'users'])->name('users.management');
     Route::get('/users-management/data', [UserController::class, 'users_data'])->name('users.management.data');
     Route::post('/users-management/update-role', [UserController::class, 'users_update_role'])->name('users.management.update.role');
-
-    Route::get('/ticket-ots', [OTSController::class, 'ticket_ots'])->name('ticket_ots');
-    Route::get('/ticket-ots/data', [OTSController::class, 'ticket_ots_data'])->name('ticket_ots.data');
-    Route::post('/ticket-ots/create', [OTSController::class, 'ticket_ots_create'])->name('ticket_ots.create');
-    Route::post('/ticket-fisik', [OTSController::class, 'ticket_fisik'])->name('ticket_fisik');
 });
 
 // only for checker
