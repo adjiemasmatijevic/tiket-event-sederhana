@@ -203,65 +203,51 @@
     </div>
 </div>
 <script>
-    $(function() {
-        $('#ticket-table').DataTable({
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            ajax: "{{ route('present_ticket_data') }}",
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'id_tiket',
-                    name: 'carts.id',
-                    title: 'ID'
-                },
-                {
-                    data: 'user_name',
-                    name: 'users.name',
-                    title: 'NAME'
-                },
-                {
-                    data: 'event_name',
-                    name: 'events.name',
-                    title: 'EVENT'
-                },
-                {
-                    data: 'ticket_name',
-                    name: 'tickets.name',
-                    title: 'TIKET'
-                },
-            ],
-            order: [
-                [3, 'asc']
-            ]
+$(function () {
+
+    const table = $('#ticket-table').DataTable({
+        processing: true,
+        serverSide: true,
+        responsive: true,
+        ajax: {
+            url: "{{ route('present_ticket_data') }}",
+            data: function (d) {
+                d.event_id = $('#eventSelect').val();
+            }
+        },
+        columns: [
+            {
+                data: 'DT_RowIndex',
+                orderable: false,
+                searchable: false
+            },
+            { data: 'id_tiket', name: 'carts.id' },
+            { data: 'user_name', name: 'users.name' },
+            { data: 'event_name', name: 'events.name' },
+            { data: 'ticket_name', name: 'tickets.name' },
+        ]
+    });
+
+    $('#eventSelect').on('change', function () {
+        const eventId = $(this).val();
+        table.ajax.reload();
+        $.ajax({
+            url: '/filter',
+            type: 'GET',
+            data: { event_id: eventId },
+            success: function (res) {
+                $('#ticketsSold').text(res.tickets_sold);
+                $('#ticketsChecked').text(res.tickets_checked);
+                $('#grossRevenue').text(res.gross_revenue);
+                $('#netRevenue').text(res.net_revenue);
+                $('#feeAdmin').text(res.fee_admin);
+            },
+            error: function () {
+                alert('Gagal memuat data dashboard');
+            }
         });
     });
-</script>
-<script>
-$('#eventSelect').on('change', function () {
-    let eventId = $(this).val();
 
-    $.ajax({
-        url: '/filter',
-        type: 'GET',
-        data: { event_id: eventId },
-        success: function (res) {
-            $('#ticketsSold').text(res.tickets_sold);
-            $('#ticketsChecked').text(res.tickets_checked);
-            $('#grossRevenue').text(res.gross_revenue);
-            $('#netRevenue').text(res.net_revenue);
-            $('#feeAdmin').text(res.fee_admin);
-        },
-        error: function (xhr) {
-            console.error(xhr.responseText);
-            alert('Gagal memuat data dashboard');
-        }
-    });
 });
 </script>
 @endsection

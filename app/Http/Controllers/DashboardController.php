@@ -109,30 +109,53 @@ class DashboardController extends Controller
             ->make(true);
     }
     //filtering dashboard by event 
-   public function filterDashboard(Request $request)
-{
-    $eventId = $request->event_id;
-    $query = Cart::query()
-        ->join('tickets', 'tickets.id', '=', 'carts.ticket_id')
-        ->join('transactions', 'transactions.id', '=', 'carts.transaction_id')
-        ->where('transactions.status', 'success');
-    if ($eventId) {
-        $query->where('tickets.event_id', $eventId);
+    public function filterDashboard(Request $request)
+    {
+        $eventId = $request->event_id;
+        $query = Cart::query()
+            ->join('tickets', 'tickets.id', '=', 'carts.ticket_id')
+            ->join('transactions', 'transactions.id', '=', 'carts.transaction_id')
+            ->where('transactions.status', 'success');
+        if ($eventId) {
+            $query->where('tickets.event_id', $eventId);
+        }
+        $ticketsSold = (clone $query)->count();
+        $ticketsChecked = (clone $query)
+            ->where('carts.presence', 1)
+            ->count();
+        $grossRevenue = (clone $query)->sum('tickets.price');
+        $feeAdmin = $grossRevenue * 0.05;
+        $netRevenue = $grossRevenue - $feeAdmin;
+        return response()->json([
+            'tickets_sold'    => $ticketsSold,
+            'tickets_checked' => $ticketsChecked,
+            'gross_revenue'   => 'IDR ' . number_format($grossRevenue, 0, ',', '.'),
+            'net_revenue'     => 'IDR ' . number_format($netRevenue, 0, ',', '.'),
+            'fee_admin'       => 'IDR ' . number_format($feeAdmin, 0, ',', '.'),
+        ]);
     }
-    $ticketsSold = (clone $query)->count();
-    $ticketsChecked = (clone $query)
-        ->where('carts.presence', 1)
-        ->count();
-    $grossRevenue = (clone $query)->sum('tickets.price');
-    $feeAdmin = $grossRevenue * 0.05;
-    $netRevenue = $grossRevenue - $feeAdmin;
-    return response()->json([
-        'tickets_sold'    => $ticketsSold,
-        'tickets_checked' => $ticketsChecked,
-        'gross_revenue'   => 'IDR ' . number_format($grossRevenue, 0, ',', '.'),
-        'net_revenue'     => 'IDR ' . number_format($netRevenue, 0, ',', '.'),
-        'fee_admin'       => 'IDR ' . number_format($feeAdmin, 0, ',', '.'),
-    ]);
-}
+    public function presentTicketData(Request $request)
+    {
+        $query = Cart::query()
+            ->join('users', 'users.id', '=', 'carts.user_id')
+            ->join('tickets', 'tickets.id', '=', 'carts.ticket_id')
+            ->join('events', 'events.id', '=', 'tickets.event_id')
+            ->join('transactions', 'transactions.id', '=', 'carts.transaction_id')
+            ->where('transactions.status', 'success')
+            ->where('carts.presence', 1)
+            ->select([
+                'carts.id as id_tiket',
+                'users.name as user_name',
+                'events.name as event_name',
+                'tickets.name as ticket_name',
+            ]);
 
+        if ($request->filled('event_id')) {
+            $query->where('events.id', $request->event_id);
+        }
+
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->make(true);
+    }
 }
