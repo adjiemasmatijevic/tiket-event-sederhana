@@ -203,41 +203,45 @@
     </div>
 </div>
 <script>
-$(function () {
-
-    let table = $('#ticket-table').DataTable({
-        processing: true,
-        serverSide: true,
-        responsive: true,
-        ajax: {
-            url: "{{ route('present_ticket_data') }}",
-            data: function (d) {
-                d.event_id = $('#eventSelect').val(); // ⬅️ kirim event_id
-            }
-        },
-        columns: [
-            {
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex',
-                orderable: false,
-                searchable: false
-            },
-            { data: 'id_tiket', name: 'carts.id' },
-            { data: 'user_name', name: 'users.name' },
-            { data: 'event_name', name: 'events.name' },
-            { data: 'ticket_name', name: 'tickets.name' },
-        ],
-        order: [[3, 'asc']]
+    $(function() {
+        $('#ticket-table').DataTable({
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            ajax: "{{ route('present_ticket_data') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'id_tiket',
+                    name: 'carts.id',
+                    title: 'ID'
+                },
+                {
+                    data: 'user_name',
+                    name: 'users.name',
+                    title: 'NAME'
+                },
+                {
+                    data: 'event_name',
+                    name: 'events.name',
+                    title: 'EVENT'
+                },
+                {
+                    data: 'ticket_name',
+                    name: 'tickets.name',
+                    title: 'TIKET'
+                },
+            ],
+            order: [
+                [3, 'asc']
+            ]
+        });
     });
-
-    // 🔥 Trigger filter
-    $('#eventSelect').on('change', function () {
-        table.ajax.reload(); // reload table
-    });
-
-});
 </script>
-
 <script>
 $('#eventSelect').on('change', function () {
     let eventId = $(this).val();
