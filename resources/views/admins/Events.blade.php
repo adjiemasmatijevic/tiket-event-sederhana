@@ -51,11 +51,6 @@
                                     placeholder="Enter Description" rows="4"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Term & Condition</label>
-                                <textarea class="form-control" id="description" name="description" required
-                                    placeholder="Enter Description" rows="4"></textarea>
-                            </div>
-                            <div class="form-group">
                                 <label for="location">Location</label>
                                 <input type="text" class="form-control" id="location" name="location" placeholder="Enter Location" required value="{{ old('location') }}">
                             </div>
