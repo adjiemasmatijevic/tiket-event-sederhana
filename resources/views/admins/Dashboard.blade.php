@@ -67,23 +67,6 @@
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-3 text-center">
-                        <span class="circle circle-sm bg-secondary-light">
-                            <i class="fe fe-user-check fe-16 text-white"></i>
-                        </span>
-                    </div>
-                    <div class="col pr-0">
-                        <p class="small text-dark mb-0">Total Checkers</p>
-                        <span class="h3 mb-0">{{ $totalCheckers }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3 mb-4">
-        <div class="card shadow border-0">
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-3 text-center">
                         <span class="circle circle-sm bg-warning-light">
                             <i class="fe fe-tag fe-16 text-white"></i>
                         </span>

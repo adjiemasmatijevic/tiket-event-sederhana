@@ -7,11 +7,6 @@ use App\Models\Cart;
 
 class CheckerController extends Controller
 {
-    public function showGateCheck()
-    {
-        return view('checkers.GateCheck');
-    }
-
     public function processScan(Request $request)
     {
         $request->validate([

@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->enum('gender', ['male', 'female']);
             $table->string('phone', 20)->unique();
             $table->text('address');
-            $table->enum('role', ['user', 'checker', 'admin'])->default('user');
+            $table->enum('role', ['user', 'admin'])->default('user');
             $table->string('profile_picture', 32)->unique()->nullable();
             $table->timestamps();
         });

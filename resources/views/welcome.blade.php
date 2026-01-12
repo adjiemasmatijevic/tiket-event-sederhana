@@ -27,7 +27,6 @@
 </div>
 <!-- Banner End -->
 
-
 <div class="title-bar container mb-0 pb-0">
     <h5 class="title font-w800 mb-0">Upcoming</h5>
 </div>
@@ -47,10 +46,6 @@
                         <h6 class="title">
                             <a href="{{ route('event_tickets', $event->id) }}">{{ $event->name }}</a>
                         </h6>
-                        <h6 class="price">Rp65.000</h6>
-                    </div>
-                    <div class="product-tag">
-                        <span class="badge badge-secondary">Reguler</span>
                     </div>
                 </div>
             </a>

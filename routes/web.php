@@ -9,7 +9,6 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CheckerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransactionController;
 
@@ -62,19 +61,10 @@ Route::middleware(['role:admin'])->group(function () {
     Route::post('/tickets/delete', [TicketController::class, 'tickets_delete'])->name('tickets.delete');
     Route::get('/trx', [TransactionController::class, 'adminTransactions'])->name('trx');
     Route::get('/trx/all', [TransactionController::class, 'transactionAll'])->name('trx.all');
-    Route::get('/users-management', [UserController::class, 'users'])->name('users.management');
-    Route::get('/users-management/data', [UserController::class, 'users_data'])->name('users.management.data');
-    Route::post('/users-management/update-role', [UserController::class, 'users_update_role'])->name('users.management.update.role');
-});
-
-// only for checker
-Route::middleware(['role:checker'])->group(function () {
-    Route::get('/gate-check', [CheckerController::class, 'showGateCheck'])->name('gate-check');
-    Route::post('/gate-check/scan', [CheckerController::class, 'processScan'])->name('gate-check.scan');
 });
 
 // only for user
-Route::middleware(['role:user,ots'])->group(function () {
+Route::middleware(['role:user'])->group(function () {
     Route::get('/event/tickets/{id}', [EventController::class, 'event_tickets'])->name('event_tickets');
     Route::post('/event/tickets/add-to-cart', [EventController::class, 'event_tickets_add_to_cart'])->name('event_tickets.add_to_cart');
 

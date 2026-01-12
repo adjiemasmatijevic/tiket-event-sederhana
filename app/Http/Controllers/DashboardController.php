@@ -17,8 +17,6 @@ class DashboardController extends Controller
     {
         if (Auth::user()->role === 'admin') {
             return $this->admin();
-        } else if (Auth::user()->role === 'checker') {
-            return $this->checker();
         } else {
             return $this->user();
         }
@@ -43,7 +41,6 @@ class DashboardController extends Controller
         $feeAdmin = $totalRevenue - $net;
 
         $totalUsers = User::where('role', 'user')->count();
-        $totalCheckers = User::where('role', 'checker')->count();
 
         $ticketsPresent = Cart::where('presence', 1)->whereHas('transaction', function ($query) {
             $query->where('status', 'success');
@@ -57,21 +54,11 @@ class DashboardController extends Controller
             'totalTickets',
             'ticketsSold',
             'totalUsers',
-            'totalCheckers',
             'totalRevenue',
             'net',
             'feeAdmin',
             'ticketsPresent'
         ));
-    }
-
-    private function checker()
-    {
-        $ticketsPresent = Cart::where('presence', 1)->whereHas('transaction', function ($query) {
-            $query->where('status', 'success');
-        })
-            ->count();
-        return view('checkers.Dashboard', compact('ticketsPresent'));
     }
 
     private function user()
