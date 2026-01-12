@@ -4,6 +4,24 @@
 @section('title', 'Tickets')
 
 @section('content')
+<link rel="stylesheet" href="https://unpkg.com/@yaireo/tagify/dist/tagify.css">
+<style>
+.tag-item {
+    display: inline-block;
+    background: #0d6efd;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 2px;
+    font-size: 13px;
+}
+.tag-item span {
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: bold;
+}
+</style>
+
 <div class="row">
     <div class="col-12 my-4">
         <h2 class="h3 mb-1 text-primary">Tickets</h2>
@@ -43,6 +61,15 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter Ticket Name" required value="{{ old('name') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Value Option</label>
+                                <input class="form-control" id="option" name="tags" placeholder="Enter Value">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Value Option</label>
+                                <input type="text" class="form-control" id="tag-input" placeholder="Enter Value">
+                                <div id="tag-container" class="mt-2"></div>
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
@@ -167,6 +194,29 @@
     </div>
 </div>
 
+<script src="https://unpkg.com/@yaireo/tagify"></script>
+<script>
+new Tagify(document.querySelector('input[name=tags]'));
+</script>
+<script>
+    $('#tag-input').on('keyup', function(e) {
+        if (e.key === ',') {
+            let value = this.value.replace(',', '').trim();
+            if (value !== '') {
+                let tag = $('<span class="tag-item">')
+                    .text(value)
+                    .append('<span>&times;</span>');
+
+                $('#tag-container').append(tag);
+                this.value = '';
+            }
+        }
+    });
+
+    $(document).on('click', '.tag-item span', function() {
+        $(this).parent().remove();
+    });
+</script>
 <script>
     CKEDITOR.replace('description', {
         toolbar: [{
@@ -267,4 +317,5 @@
         $('#delete_id').val(id);
     });
 </script>
+
 @endsection

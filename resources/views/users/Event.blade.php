@@ -57,8 +57,11 @@
             </div>
             @endif
             <h6>Description:</h6>
-            {!! $event->description !!}
-
+            <p>{!! $event->description !!}</p>
+            {{-- <hr><br>
+            <h6>Term & Condition:</h6>
+            1. Term n Condition #1 <br>
+            2. Term n Condition #2 --}}
             <div style="height: 100px;"></div>
 
         </div>

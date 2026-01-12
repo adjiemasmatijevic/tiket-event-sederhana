@@ -50,7 +50,7 @@
                         <h6 class="price">Rp65.000</h6>
                     </div>
                     <div class="product-tag">
-                        <span class="badge badge-secondary">Reguler</span>
+                        <span class="badge badge-secondary">Presale</span>
                     </div>
                 </div>
             </a>
