@@ -63,15 +63,6 @@
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter Ticket Name" required value="{{ old('name') }}">
                             </div>
                             <div class="form-group">
-                                <label for="name">Value Option</label>
-                                <input class="form-control" id="option" name="tags" placeholder="Enter Value">
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Value Option</label>
-                                <input type="text" class="form-control" id="tag-input" placeholder="Enter Value">
-                                <div id="tag-container" class="mt-2"></div>
-                            </div>
-                            <div class="form-group">
                                 <label>Description</label>
                                 <textarea class="form-control" id="description" name="description" required placeholder="Enter Description" rows="4">{{ old('description') }}</textarea>
                             </div>
@@ -84,17 +75,16 @@
                                 <input type="number" class="form-control" id="price" name="price" placeholder="Enter Price" required value="{{ old('price') }}" min="0">
                             </div>
                             <div class="form-group">
-    <label>Option Value (Optional)</label>
-    <input type="text"
-           class="form-control"
-           name="option_value"
-           placeholder="Contoh: Coca Cola,Sprite,Fanta"
-           value="{{ old('option_value') }}">
-    <small class="text-muted">
-        Pisahkan dengan koma jika lebih dari satu option.
-    </small>
-</div>
-
+                                <label>Option Value (Optional)</label>
+                                <input type="text"
+                                    class="form-control"
+                                    name="option_value"
+                                    placeholder="Contoh: Coca Cola,Sprite,Fanta"
+                                    value="{{ old('option_value') }}">
+                                <small class="text-muted">
+                                    Pisahkan dengan koma jika lebih dari satu option.
+                                </small>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
