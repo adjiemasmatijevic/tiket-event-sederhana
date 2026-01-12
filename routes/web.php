@@ -22,7 +22,6 @@ Route::fallback(function () {
 
 // landing page
 Route::get('/', [LandingController::class, 'home'])->name('home');
-Route::get('/ticket-ots/tickets/{id}', [OTSController::class, 'ticket_ots_tickets'])->name('ticket_ots.tickets');
 
 // only for guest without session
 Route::middleware('guest')->group(function () {
