@@ -73,7 +73,14 @@ class CartController extends Controller
         ];
 
         foreach ($cartItems as $item) {
+
             $itemName = $item->ticket->name;
+
+            // ambil notes dari cart item
+            if (!empty($item->notes)) {
+                $itemName .= ' - ' . $item->notes;
+            }
+
             $itemPrice = (float) $item->ticket->price;
 
             if (isset($data['items'][$itemName])) {
@@ -81,18 +88,19 @@ class CartController extends Controller
                 $data['items'][$itemName]['total'] += $itemPrice;
             } else {
                 $data['items'][$itemName] = [
-                    'name' => $itemName,
-                    'qty' => 1,
+                    'name'  => $itemName,
+                    'qty'   => 1,
                     'price' => $itemPrice,
                     'total' => $itemPrice,
                 ];
             }
         }
 
+
         $data['items'] = array_values($data['items']);
 
         try {
-            $response = Http::post('https://payment.talangdigital.com/api/transaction-create', $data);
+            $response = Http::post('https://payment-test.talangdigital.com/api/transaction-create', $data);
         } catch (\Throwable $th) {
             return back()->with('error', 'Failed to connect to checkout service. Please try again later.');
         }
@@ -119,6 +127,6 @@ class CartController extends Controller
         }
         session()->forget(['voucher_id', 'voucher_discount']);
 
-        return redirect('https://payment.talangdigital.com/transaction-detail/' . $response['id']);
+        return redirect('https://payment-test.talangdigital.com/transaction-detail/' . $response['id']);
     }
 }

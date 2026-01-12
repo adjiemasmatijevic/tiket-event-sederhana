@@ -84,36 +84,71 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="{{ route('event_tickets.add_to_cart') }}" method="POST">
-                @csrf
-                <input type="hidden" name="event_id" value="{{ $event->id }}">
-
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="ticket_id" class="form-label">Ticket</label>
-                        <select class="form-select" id="ticket_id" name="ticket_id" required>
-                            <option value="" disabled selected>-- Select Ticket --</option>
-                            @foreach($event->tickets as $ticket)
-                            <option value="{{ $ticket->id }}">
+           <form action="{{ route('event_tickets.add_to_cart') }}" method="POST">
+            @csrf
+            <input type="hidden" name="event_id" value="{{ $event->id }}">
+            <input type="hidden" name="notes" id="notes">
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="ticket_id" class="form-label">Ticket</label>
+                    <select class="form-select" id="ticket_id" name="ticket_id" required>
+                        <option value="" disabled selected>-- Select Ticket --</option>
+                        @foreach($event->tickets as $ticket)
+                            <option value="{{ $ticket->id }}"
+                                    data-option="{{ $ticket->option_value }}">
                                 {{ $ticket->name }} (Rp. {{ number_format($ticket->price, 0, ',', '.') }})
                             </option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="quantity" class="form-label">Amount</label>
-                        <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1" required>
-                    </div>
+                        @endforeach
+                    </select>
                 </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                <div class="mb-3" id="optionWrapper" style="display:none;">
+                    <label class="form-label">Pilih Paket</label>
+                    <select class="form-select" id="ticket_option_select"></select>
                 </div>
-            </form>
-
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Amount</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </form>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+<script>
+const ticketSelect = document.getElementById('ticket_id');
+const optionWrapper = document.getElementById('optionWrapper');
+const optionSelect = document.getElementById('ticket_option_select');
+const notesInput = document.getElementById('notes');
+
+ticketSelect.addEventListener('change', function () {
+
+    const optionValue = this.options[this.selectedIndex].dataset.option || '';
+    optionSelect.innerHTML = '';
+    notesInput.value = '';
+
+    if (optionValue.trim() !== '') {
+        optionValue.split(',').forEach(val => {
+            const opt = document.createElement('option');
+            opt.value = val.trim();
+            opt.textContent = val.trim();
+            optionSelect.appendChild(opt);
+        });
+
+        optionWrapper.style.display = 'block';
+        notesInput.value = optionSelect.value; 
+    } else {
+        optionWrapper.style.display = 'none';
+    }
+});
+
+optionSelect.addEventListener('change', function () {
+    notesInput.value = this.value;
+});
+</script>
+
+
 @endsection

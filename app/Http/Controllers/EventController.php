@@ -215,6 +215,7 @@ class EventController extends Controller
             'event_id' => 'required|exists:events,id',
             'ticket_id' => 'required|exists:tickets,id',
             'quantity' => 'required|integer|min:1',
+             'notes'     => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -245,6 +246,8 @@ class EventController extends Controller
                 $cart = new Cart();
                 $cart->user_id = Auth::user()->id;
                 $cart->ticket_id = $ticket->id;
+                $cart->notes = $request->notes;
+                // $cart->status = 'available';
                 $cart->save();
             }
         } catch (Exception $e) {

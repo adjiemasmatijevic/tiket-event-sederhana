@@ -28,6 +28,7 @@ class TicketController extends Controller
             'tickets.name',
             'tickets.total',
             'tickets.price',
+            'tickets.option_value',
             'tickets.created_at',
             'events.time_start',
             'events.time_end',
@@ -72,6 +73,8 @@ class TicketController extends Controller
             'description' => 'required|string',
             'total' => 'required|integer|min:1',
             'price' => 'required|integer|min:0',
+            'option_value' => 'nullable|string|max:255', // Assuming option_value is a string, adjust as necessary
+            
         ]);
 
         if ($validator->fails()) {
@@ -87,6 +90,8 @@ class TicketController extends Controller
                 'description' => $request->description,
                 'total' => $request->total,
                 'price' => $request->price,
+                'option_value' => $request->option_value,
+                
             ]);
         } catch (Exception $e) {
             Log::error('Failed to create ticket: ' . $e->getMessage());
@@ -105,6 +110,7 @@ class TicketController extends Controller
             'description' => 'required|string',
             'total' => 'required|integer|min:1',
             'price' => 'required|integer|min:0',
+            'option_value' => 'nullable|string|max:255', // Assuming option_value is a string, adjust as necessary
         ]);
 
         if ($validator->fails()) {
@@ -120,6 +126,7 @@ class TicketController extends Controller
             $ticket->description = $request->description;
             $ticket->total = $request->total;
             $ticket->price = $request->price;
+            $ticket->option_value = $request->option_value;
             $ticket->save();
         } catch (Exception $e) {
             Log::error('Failed to update ticket: ' . $e->getMessage());

@@ -83,6 +83,18 @@
                                 <label for="price">Price (IDR)</label>
                                 <input type="number" class="form-control" id="price" name="price" placeholder="Enter Price" required value="{{ old('price') }}" min="0">
                             </div>
+                            <div class="form-group">
+    <label>Option Value (Optional)</label>
+    <input type="text"
+           class="form-control"
+           name="option_value"
+           placeholder="Contoh: Coca Cola,Sprite,Fanta"
+           value="{{ old('option_value') }}">
+    <small class="text-muted">
+        Pisahkan dengan koma jika lebih dari satu option.
+    </small>
+</div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
@@ -135,6 +147,17 @@
                                 <label for="edit_price">Price (IDR)</label>
                                 <input type="number" class="form-control" id="edit_price" name="price" placeholder="Enter Price" required min="0">
                             </div>
+                            <div class="form-group">
+                            <label>Option Value (Optional)</label>
+                            <input type="text"
+                                class="form-control"
+                                id="edit_option_value"
+                                name="option_value"
+                                placeholder="Contoh: Coca Cola,Sprite,Fanta" >
+                            <small class="text-muted">
+                                Pisahkan dengan koma jika lebih dari satu option.
+                            </small>
+                        </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
@@ -303,6 +326,8 @@ new Tagify(document.querySelector('input[name=tags]'));
             CKEDITOR.instances.edit_description.setData(data.description);
             $('#edit_total').val(data.total);
             $('#edit_price').val(data.price);
+            $('#edit_option_value').val(data.option_value);
+
 
             $('#EditModal .loading-spinner').hide();
             $('#EditModal form').fadeIn();

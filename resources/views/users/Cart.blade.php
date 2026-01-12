@@ -41,6 +41,11 @@ $totalFull = $subtotalAfterDiscount + $adminFee;
                                     <a href="{{ route('event_tickets', $item->ticket->event->id) }}">{{ $item->ticket->event->name }}</a>
                                 </h6>
                                 <span class="font-12 brand-tag">{{ $item->ticket->name }}</span>
+                                <span class="font-12 brand-tag">
+                                    @if(!empty($item->notes))
+                                        <small class="text-muted">- {{ $item->notes }}</small>
+                                    @endif
+                                </span>
                                 <div class="cart-footer" style="display: flex; justify-content: space-between; align-items: center;">
                                     <h6 class="price mb-0">Rp. {{ number_format($item->ticket->price, 0, ',', '.') }}</h6>
                                     <form action="{{ route('cart.remove') }}" method="POST" style="margin: 0;">
