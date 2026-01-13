@@ -16,9 +16,12 @@ class TicketController extends Controller
 {
     public function tickets()
     {
-        $events = Event::where('status', 'active')->orderBy('name', 'ASC')->get(['id', 'name']);
+        $events = Event::orderBy('name', 'ASC')
+            ->get(['id', 'name', 'status']);
+
         return view('admins.Tickets', compact('events'));
     }
+
 
     public function tickets_data()
     {
@@ -33,14 +36,16 @@ class TicketController extends Controller
             'events.time_start',
             'events.time_end',
         ])
-            ->join('events', 'tickets.event_id', '=', 'events.id');
-        if (request()->event_id) {
+            ->leftJoin('events', 'tickets.event_id', '=', 'events.id');
+
+        if (request()->filled('event_id')) {
             $query->where('tickets.event_id', request()->event_id);
         }
-        $query->orderBy('events.time_start', 'DESC')
+
+        $query->orderByRaw('events.time_start IS NULL')
+            ->orderBy('events.time_start', 'DESC')
             ->orderBy('events.time_end', 'DESC')
             ->orderBy('tickets.created_at', 'DESC');
-
         return DataTables::of($query)
             ->addIndexColumn()
             //hitung sold dan remaining status success
