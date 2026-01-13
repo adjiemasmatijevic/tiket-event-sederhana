@@ -6,11 +6,12 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 my-4">
-        <h2 class="h3 mb-3 text-primary">Data Cart</h2>
+        <h2 class="h3 mb-1 text-primary">Data Carts</h2>
+        <p class="mb-3 text-dark">manage cart information</p>
     </div>
 </div>
  <div class="form-group mb-3">
-            <label for="example-select">Event</label>
+            <label for="example-select">Events</label>
            <select class="form-control" id="eventSelect">
                     <option value="">All Event</option>
                     @foreach($events as $event)
@@ -20,7 +21,7 @@
         </div>
  <div class="card shadow">
     <div class="card-body">
-        <h5 class="card-title">Data Cart Tiket</h5>
+        <h5 class="card-title">Data Cart Tikets</h5>
         <div class="col-md-12 col-xl-12 mb-3">
     </div>
         <div class="table-responsive">
@@ -35,6 +36,7 @@
                         <th>PAKET</th>
                         <th>PRESENSI</th>
                         <th>STATUS</th>
+                        <th>STATUS TRANSACTIONS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -137,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (data.length === 0) {
                     rows = `
                         <tr>
-                            <td colspan="6" class="text-center text-muted">
+                            <td colspan="7" class="text-center text-muted">
                                 Tidak ada data
                             </td>
                         </tr>`;
@@ -145,12 +147,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     data.forEach((item, index) => {
 
                         const presensi = item.presence == 1
-                            ? `<button class="btn btn-md btn-success text-white fw-semibold shadow-sm" disabled>
-                                Hadir
-                               </button>`
-                            : `<button class="btn btn-md btn-secondary text-white fw-semibold shadow-sm" disabled>
-                                Belum Hadir
-                               </button>`;
+                            ? `<button class="btn btn-md btn-success text-white fw-semibold shadow-sm" disabled>Hadir</button>`
+                            : `<button class="btn btn-md btn-secondary text-white fw-semibold shadow-sm" disabled>Belum Hadir</button>`;
 
                         let btnClass = 'btn-secondary';
                         let btnText  = item.status;
@@ -159,9 +157,14 @@ document.addEventListener('DOMContentLoaded', function () {
                             btnClass = 'btn-success';
                             btnText  = 'Success';
                         } else if (item.status === 'checkout') {
-                            btnClass = 'btn-warning text-dark';
+                            btnClass = 'btn-warning text-white';
                             btnText  = 'Checkout';
                         }
+
+                        let trxStatus = item.transaction?.status ?? '-';
+                        let trxBadge = trxStatus === 'success'
+                            ? `<span class="btn btn-md btn-success text-white fw-semibold shadow-sm">Success</span>`
+                            : `<span class="btn btn-sm btn-secondary fw-semibold">${trxStatus}</span>`;
 
                         rows += `
                             <tr>
@@ -176,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         ${btnText}
                                     </span>
                                 </td>
+                                <td>${trxBadge}</td>
                             </tr>
                         `;
                     });
@@ -191,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(() => {
                 document.querySelector('#ticket-table tbody').innerHTML = `
                     <tr>
-                        <td colspan="6" class="text-center text-danger">
+                        <td colspan="7" class="text-center text-danger">
                             Gagal memuat data
                         </td>
                     </tr>`;
@@ -205,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 </script>
+
 
 
 @endsection

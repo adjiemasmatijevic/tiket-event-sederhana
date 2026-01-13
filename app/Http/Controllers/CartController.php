@@ -138,8 +138,11 @@ class CartController extends Controller
     }
     public function cartData(Request $request)
     {
-        $query = Cart::with(['user', 'ticket.event'])
-            ->whereIn('status', ['checkout', 'available']);
+        $query = Cart::with(['user', 'ticket.event', 'transaction'])
+            ->whereIn('status', ['checkout', 'available'])
+            ->whereHas('transaction', function ($q) {
+                $q->where('status', 'success');
+            });
 
         if ($request->filled('event_id')) {
             $query->whereHas('ticket', function ($q) use ($request) {
