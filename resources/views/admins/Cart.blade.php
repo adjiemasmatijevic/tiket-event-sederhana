@@ -26,7 +26,7 @@
     </div>
         <div class="table-responsive">
             <table id="ticket-table"
-                   class="table table-bordered table-striped datatables"
+                   class="table table-bordered table-striped datatables text-center"
                    style="width:100%">
                 <thead class="thead-light">
                     <tr>
@@ -36,7 +36,7 @@
                         <th>PAKET</th>
                         <th>PRESENSI</th>
                         <th>STATUS</th>
-                        <th>STATUS TRANSACTIONS</th>
+                        <th>STATUS TRX</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,7 +48,7 @@
 
 
 </div>
-<script>
+{{-- <script>
 document.addEventListener('DOMContentLoaded', function () {
     fetch("{{ route('cart.data') }}")
         .then(res => res.json())
@@ -208,8 +208,82 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
-</script>
+</script> --}}
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    let table = $('#ticket-table').DataTable({
+        searching: true,
+        paging: true,
+        ordering: true
+    });
+
+    function loadTickets(eventId = '') {
+        let url = "{{ route('cart.data') }}";
+        if (eventId) {
+            url += `?event_id=${eventId}`;
+        }
+
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+
+                table.clear(); // kosongkan datatable
+
+                if (data.length === 0) {
+                    table.draw();
+                    return;
+                }
+
+                data.forEach((item, index) => {
+
+                    const presensi = item.presence == 1
+                        ? `<button class="btn btn-md btn-success text-white fw-semibold shadow-sm" disabled>Hadir</button>`
+                        : `<button class="btn btn-md btn-secondary text-white fw-semibold shadow-sm" disabled>Belum Hadir</button>`;
+
+                    let btnClass = 'btn-secondary';
+                    let btnText  = item.status;
+
+                    if (item.status === 'success') {
+                        btnClass = 'btn-success';
+                        btnText  = 'Success';
+                    } else if (item.status === 'checkout') {
+                        btnClass = 'btn btn-md btn-warning text-white fw-semibold shadow-sm';
+                        btnText  = 'Checkout';
+                    }
+
+                    let trxStatus = item.transaction?.status ?? '-';
+                    let trxBadge = trxStatus === 'success'
+                        ? `<span class="btn btn-md btn-success text-white fw-semibold shadow-sm">Success</span>`
+                        : `<span class="btn btn-md btn-secondary text-white fw-semibold shadow-sm">${trxStatus}</span>`;
+
+                    table.row.add([
+                        index + 1,
+                        item.user?.name ?? '-',
+                        item.ticket?.name ?? '-',
+                        item.notes ?? '-',
+                        presensi,
+                        `<span class="btn ${btnClass} btn-sm">${btnText}</span>`,
+                        trxBadge
+                    ]);
+                });
+
+                table.draw();
+            })
+            .catch(() => {
+                table.clear().draw();
+            });
+    }
+
+    loadTickets();
+
+    document.getElementById('eventSelect').addEventListener('change', function () {
+        loadTickets(this.value);
+    });
+
+});
+</script>
 
 
 @endsection
