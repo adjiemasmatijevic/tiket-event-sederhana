@@ -40,6 +40,20 @@ class TicketController extends Controller
 
         return DataTables::of($query)
             ->addIndexColumn()
+            //hitung sold dan remaining status success
+            ->addColumn('sold', function ($ticket) {
+                $sold = Cart::whereHas('transaction', function ($q) {
+                    $q->where('status', 'success');
+                })->where('ticket_id', $ticket->id)->count();
+                return $sold;
+            })
+            ->addColumn('remaining', function ($ticket) {
+                $sold = Cart::whereHas('transaction', function ($q) {
+                    $q->where('status', 'success');
+                })->where('ticket_id', $ticket->id)->count();
+                $remaining = $ticket->total - $sold;
+                return $remaining;
+            })
             ->addColumn('action', function ($ticket) {
                 return '<div class="d-flex">
                             <button type="button" class="btn btn-warning btn-rounded"

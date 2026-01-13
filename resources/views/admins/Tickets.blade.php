@@ -195,6 +195,8 @@
                                 <th>EVENT NAME</th>
                                 <th>TICKET NAME</th>
                                 <th>TOTAL</th>
+                                <th>SOLD</th>
+                                <th>REMAINING</th>
                                 <th>PRICE</th>
                                 <th>ACTION</th>
                             </tr>
@@ -279,6 +281,14 @@ new Tagify(document.querySelector('input[name=tags]'));
                 {
                     data: 'total',
                     name: 'total'
+                },
+                {
+                    data: 'sold',
+                    name: 'sold'
+                },
+                {
+                    data: 'remaining',
+                    name: 'remaining'
                 },
                 {
                     data: 'price',
