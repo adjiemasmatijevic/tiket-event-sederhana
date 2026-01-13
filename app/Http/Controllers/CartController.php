@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Cart;
 use App\Models\Transaction;
 use App\Models\Voucher;
+use App\Models\Event;
 
 class CartController extends Controller
 {
@@ -128,5 +129,26 @@ class CartController extends Controller
         session()->forget(['voucher_id', 'voucher_discount']);
 
         return redirect('https://payment.talangdigital.com/transaction-detail/' . $response['id']);
+    }
+    public function adminCart()
+    {
+        $events = Event::orderBy('name')->get();
+
+        return view('admins.Cart', compact('events'));
+    }
+    public function cartData(Request $request)
+    {
+        $query = Cart::with(['user', 'ticket.event'])
+            ->whereIn('status', ['checkout', 'available']);
+
+        if ($request->filled('event_id')) {
+            $query->whereHas('ticket', function ($q) use ($request) {
+                $q->where('event_id', $request->event_id);
+            });
+        }
+
+        return response()->json(
+            $query->latest()->get()
+        );
     }
 }

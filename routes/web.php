@@ -77,6 +77,8 @@ Route::middleware(['role:admin'])->group(function () {
     Route::post('/ticket-fisik', [OTSController::class, 'ticket_fisik'])->name('ticket_fisik');
     Route::get('/filter', [DashboardController::class, 'filterDashboard']);
     Route::get('/present-ticket-data', [DashboardController::class, 'presentTicketData'])->name('present_ticket_data');
+    Route::get('/cart-admin', [CartController::class, 'adminCart'])->name('admin.cart');
+    Route::get('/cart-admin/data', [CartController::class, 'cartData'])->name('cart.data');
 });
 
 // only for checker

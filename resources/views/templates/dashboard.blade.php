@@ -148,6 +148,15 @@
 
                 <ul class="navbar-nav flex-fill w-100 mb-2">
                     <li class="nav-item w-100">
+                        <a class="nav-link d-flex align-items-center {{ Route::currentRouteName() == 'admin.cart' ? 'bg-primary rounded text-white font-weight-bold' : '' }}" href="{{ route('admin.cart') }}">
+                            <i class="fe fe-bar-chart-2 fe-16"></i>
+                            <span class="ml-3 item-text">Cart</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
                         <a class="nav-link d-flex align-items-center {{ Route::currentRouteName() == 'trx' ? 'bg-primary rounded text-white font-weight-bold' : '' }}" href="{{ route('trx') }}">
                             <i class="fe fe-bar-chart fe-16"></i>
                             <span class="ml-3 item-text">Transactions</span>
