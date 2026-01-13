@@ -101,7 +101,7 @@ class CartController extends Controller
         $data['items'] = array_values($data['items']);
 
         try {
-            $response = Http::post('https://payment-test.talangdigital.com/api/transaction-create', $data);
+            $response = Http::post('https://payment.talangdigital.com/api/transaction-create', $data);
         } catch (\Throwable $th) {
             return back()->with('error', 'Failed to connect to checkout service. Please try again later.');
         }
@@ -128,7 +128,7 @@ class CartController extends Controller
         }
         session()->forget(['voucher_id', 'voucher_discount']);
 
-        return redirect('https://payment-test.talangdigital.com/transaction-detail/' . $response['id']);
+        return redirect('https://payment.talangdigital.com/transaction-detail/' . $response['id']);
     }
     public function adminCart()
     {
