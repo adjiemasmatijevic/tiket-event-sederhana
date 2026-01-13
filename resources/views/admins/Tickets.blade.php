@@ -36,7 +36,15 @@
             {{ session('error') }}
         </div>
         @endif
-
+ <div class="form-group mb-3">
+            <label for="example-select">Events</label>
+           <select class="form-control" id="eventSelect">
+                    <option value="">All Event</option>
+                    @foreach($events as $event)
+                        <option value="{{ $event->id }}">{{ $event->name }}</option>
+                    @endforeach
+            </select>
+        </div>
         <div class="modal fade" id="NewModal" tabindex="-1" role="dialog" aria-labelledby="NewModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -245,6 +253,7 @@ new Tagify(document.querySelector('input[name=tags]'));
         resize_enabled: false,
         height: 150
     });
+
     CKEDITOR.replace('edit_description', {
         toolbar: [{
             name: 'basicstyles',
@@ -258,57 +267,39 @@ new Tagify(document.querySelector('input[name=tags]'));
         height: 150
     });
 
+    let table;
+
     $(function() {
-        $('#ticket-table').DataTable({
+        table = $('#ticket-table').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
-            ajax: "{{ route('tickets.data') }}",
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'event_name',
-                    name: 'events.name'
-                },
-                {
-                    data: 'name',
-                    name: 'tickets.name'
-                },
-                {
-                    data: 'total',
-                    name: 'total'
-                },
-                {
-                    data: 'sold',
-                    name: 'sold'
-                },
-                {
-                    data: 'remaining',
-                    name: 'remaining'
-                },
+            ajax: {
+                url: "{{ route('tickets.data') }}",
+                data: function(d){
+                    d.event_id = $('#eventSelect').val(); 
+                }
+            },
+            columns: [
+                { data: 'DT_RowIndex', orderable:false, searchable:false },
+                { data: 'event_name', name: 'events.name' },
+                { data: 'name', name: 'tickets.name' },
+                { data: 'total', name: 'total' },
+                { data: 'sold', name: 'sold' },
+                { data: 'remaining', name: 'remaining' },
                 {
                     data: 'price',
                     name: 'price',
-                    render: function(data, type, row) {
+                    render: function(data) {
                         return 'IDR ' + parseInt(data).toLocaleString('id-ID');
                     }
                 },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'id',
-                    visible: false,
-                    searchable: false
-                }
+                { data: 'action', orderable:false, searchable:false },
+                { data: 'id', visible:false, searchable:false }
             ]
+        });
+        $('#eventSelect').on('change', function(){
+            table.ajax.reload();
         });
     });
 
@@ -328,7 +319,6 @@ new Tagify(document.querySelector('input[name=tags]'));
             $('#edit_price').val(data.price);
             $('#edit_option_value').val(data.option_value);
 
-
             $('#EditModal .loading-spinner').hide();
             $('#EditModal form').fadeIn();
         }).fail(function() {
@@ -338,9 +328,9 @@ new Tagify(document.querySelector('input[name=tags]'));
     });
 
     $(document).on('click', '[data-target="#DeleteModal"]', function() {
-        let id = $(this).data('id');
-        $('#delete_id').val(id);
+        $('#delete_id').val($(this).data('id'));
     });
 </script>
+
 
 @endsection

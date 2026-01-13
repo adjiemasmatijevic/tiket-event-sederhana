@@ -33,8 +33,11 @@ class TicketController extends Controller
             'events.time_start',
             'events.time_end',
         ])
-            ->join('events', 'tickets.event_id', '=', 'events.id')
-            ->orderBy('events.time_start', 'DESC')
+            ->join('events', 'tickets.event_id', '=', 'events.id');
+        if (request()->event_id) {
+            $query->where('tickets.event_id', request()->event_id);
+        }
+        $query->orderBy('events.time_start', 'DESC')
             ->orderBy('events.time_end', 'DESC')
             ->orderBy('tickets.created_at', 'DESC');
 
@@ -88,7 +91,7 @@ class TicketController extends Controller
             'total' => 'required|integer|min:1',
             'price' => 'required|integer|min:0',
             'option_value' => 'nullable|string|max:255', // Assuming option_value is a string, adjust as necessary
-            
+
         ]);
 
         if ($validator->fails()) {
@@ -105,7 +108,7 @@ class TicketController extends Controller
                 'total' => $request->total,
                 'price' => $request->price,
                 'option_value' => $request->option_value,
-                
+
             ]);
         } catch (Exception $e) {
             Log::error('Failed to create ticket: ' . $e->getMessage());
