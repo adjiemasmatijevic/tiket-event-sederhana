@@ -26,17 +26,29 @@
                     </div>
                 </div>
 
-                <div class="order-detail">
-                    <div class="d-flex gap-2">
-                        <span>{{ $ticket->ticket_name }}</span>
-                        @if($ticket->presence == 1)
-                        <span class="badge bg-success ms-3">Attended</span>
-                        @endif
-                    </div>
-                    <div class="d-flex gap-1 align-items-center mt-1">
-                        <span class="text-muted">{{ $ticket->event_location }}</span>
-                    </div>
-                </div>
+               <div class="order-detail">
+    <div>
+        <div class="d-flex align-items-center gap-2">
+            <span class="fw-semibold">{{ $ticket->ticket_name }}</span>
+
+            @if($ticket->presence == 1)
+                <span class="badge bg-success">Attended</span>
+            @endif
+        </div>
+
+        @if(!empty($ticket->notes))
+            <div class="font-12 text-muted mt-1">
+                -{{ $ticket->notes }}
+            </div>
+        @endif
+    </div>
+
+    <div class="d-flex gap-1 align-items-center mt-1">
+        <span class="text-muted">{{ $ticket->event_location }}</span>
+    </div>
+</div>
+
+
 
                 <div class="status">
                     <button type="button" class="btn btn-sm btn-primary me-4" data-bs-toggle="modal" data-bs-target="#qrModal-{{ $ticket->id_tiket }}">

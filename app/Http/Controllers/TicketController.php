@@ -194,6 +194,7 @@ class TicketController extends Controller
             ->select(
                 'carts.id as id_tiket',
                 'carts.presence as presence',
+                'carts.notes as notes',
                 'events.id as event_id',
                 'events.image as event_image',
                 'events.name as event_name',
