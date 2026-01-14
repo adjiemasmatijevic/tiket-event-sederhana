@@ -5,7 +5,17 @@
 
 @section('content')
 <div class="container py-4">
+ @if (session('success'))
+        <div class="mb-3 fs-3 alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
+    @if (session('error'))
+        <div class="mb-3 fs-3 alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <style>
         .profile-container {
             position: relative;
