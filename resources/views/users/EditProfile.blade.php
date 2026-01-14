@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <h5 class="mb-3 page-title text-primary">Edit Profile</h5>
+    <h2 class="mb-3 page-title text-primary">Edit Profile</h2>
 
     <form method="POST" action="{{ route('update.profile') }}">
         @csrf
