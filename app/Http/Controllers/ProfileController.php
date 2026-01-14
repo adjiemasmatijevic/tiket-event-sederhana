@@ -23,6 +23,16 @@ class ProfileController extends Controller
 
         return view('Profile', compact('user'));
     }
+        public function editProfile()
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+        return view('users.EditProfile', compact('user'));
+    }
+
+    public function changePasswordPage()
+    {
+        return view('users.ChangePassword');
+    }
 
     public function update_photo(Request $request)
     {
@@ -73,7 +83,7 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Profile photo updated successfully');
     }
-
+ 
     public function update_profile(Request $request)
     {
         $validator = Validator::make($request->all(), [

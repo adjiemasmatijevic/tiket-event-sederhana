@@ -44,6 +44,8 @@ Route::middleware('guest')->group(function () {
 // only for authenticated user with session
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/editprofile', [ProfileController::class, 'editProfile'])->name('customers.editprofile');
+    Route::get('/changepassword', [ProfileController::class, 'changePasswordPage'])->name('customers.changepassword');
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     Route::post('/update-photo', [ProfileController::class, 'update_photo'])->name('update.photo');
     Route::post('/update-profile', [ProfileController::class, 'update_profile'])->name('update.profile');
