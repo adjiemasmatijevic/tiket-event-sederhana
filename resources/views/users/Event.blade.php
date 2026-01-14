@@ -101,9 +101,9 @@
                     </select>
                 </div>
                 <div class="mb-3" id="optionWrapper" style="display:none;">
-                <label class="form-label">Package</label>
+                <label class="form-label">Paket</label>
                 <select class="form-select" id="ticket_option_select" name="notes">
-                    <option value="" disabled selected>-- Select Package --</option>
+                    <option value="" disabled selected>-- Pilih Paket --</option>
                     @foreach($event->tickets as $ticket)
                         @php
                             $options = $ticket->option_value
