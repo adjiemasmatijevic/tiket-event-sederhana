@@ -103,7 +103,7 @@
                     <div class="menu-icon text-primary">
                         <i class="icon feather icon-shopping-cart" style="font-size: 20px;"></i>
                     </div>
-                    <span class="menu-text text-secondary">Chart</span>
+                    <span class="menu-text text-secondary">Cart</span>
                 </a>
             </li>
             <li class="col-6">
