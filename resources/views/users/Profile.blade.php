@@ -183,7 +183,7 @@
             confirmButtonColor: 'rgb(255, 0, 0)',
             cancelButtonColor: '#6c757d',
             confirmButtonText: 'Logout',
-            cancelButtonText: 'Cnacel'
+            cancelButtonText: 'Cancel'
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = this.href;
