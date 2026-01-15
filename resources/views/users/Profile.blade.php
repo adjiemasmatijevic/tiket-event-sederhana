@@ -176,14 +176,14 @@
     document.getElementById('logout-button').addEventListener('click', function(e) {
         e.preventDefault()
         Swal.fire({
-            title: 'Yakin ingin logout?',
-            text: "Kamu akan keluar dari akun ini.",
+            title: 'Are you sure?',
+            text: "You will be logged out.",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#f0899f',
-            cancelButtonColor: '#bbbbbb',
-            confirmButtonText: 'Ya, Logout',
-            cancelButtonText: 'Batal'
+            confirmButtonColor: 'rgb(255, 0, 0)',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Logout',
+            cancelButtonText: 'Cnacel'
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = this.href;
