@@ -109,7 +109,7 @@
     <div class="content-box mt-4 mb-4">
         <ul class="row g-2">
             <li class="col-6">
-                <a href="order.html" class="menu-card">
+                <a href="{{ route('cart') }}" class="menu-card">
                     <div class="menu-icon text-primary">
                         <i class="icon feather icon-shopping-cart" style="font-size: 20px;"></i>
                     </div>
