@@ -6,17 +6,17 @@
 @section('content')
 <div class="container py-5">
 
-    @if (session('success'))
-        <div class="mb-3 fs-3 alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+     @if (session('success'))
+<div id="toastSuccess" class="alert alert-success fs-5">
+    {{ session('success') }}
+</div>
+@endif
 
-    @if (session('error'))
-        <div class="mb-3 fs-3 alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+@if (session('error'))
+<div id="toastError" class="alert alert-danger fs-5">
+    {{ session('error') }}
+</div>
+@endif
 
     <h2 class="mb-3 page-title text-primary">Change Password</h2>
 

@@ -6,16 +6,16 @@
 @section('content')
 <div class="container py-4">
  @if (session('success'))
-        <div class="mb-3 fs-3 alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+<div id="toastSuccess" class="alert alert-success fs-5">
+    {{ session('success') }}
+</div>
+@endif
 
-    @if (session('error'))
-        <div class="mb-3 fs-3 alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+@if (session('error'))
+<div id="toastError" class="alert alert-danger fs-5">
+    {{ session('error') }}
+</div>
+@endif
     <style>
         .profile-container {
             position: relative;

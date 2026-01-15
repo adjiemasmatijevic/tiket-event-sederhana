@@ -21,16 +21,17 @@ $totalFull = $subtotalAfterDiscount + $adminFee;
 
                     <div class="container" style="padding-bottom: 150px;">
                         <br>
-                        @if (session('success'))
-                        <div class="mb-3 fs-3 alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                        @endif
-                        @if (session('error'))
-                        <div class="mb-3 fs-3 alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                        @endif
+                       @if (session('success'))
+<div id="toastSuccess" class="alert alert-success fs-5">
+    {{ session('success') }}
+</div>
+@endif
+
+@if (session('error'))
+<div id="toastError" class="alert alert-danger fs-5">
+    {{ session('error') }}
+</div>
+@endif
                         @forelse ($cartItems as $item)
                         <div class="cart-box">
                             <div class="dz-media">

@@ -6,16 +6,17 @@
 @section('content')
 <div class="container p-0">
     <br>
-    @if (session('success'))
-    <div class="mb-3 fs-3 alert alert-success">
-        {{ session('success') }}
-    </div>
-    @endif
-    @if (session('error'))
-    <div class="mb-3 fs-3 alert alert-danger">
-        {{ session('error') }}
-    </div>
-    @endif
+ @if (session('success'))
+<div id="toastSuccess" class="alert alert-success fs-5">
+    {{ session('success') }}
+</div>
+@endif
+
+@if (session('error'))
+<div id="toastError" class="alert alert-danger fs-5">
+    {{ session('error') }}
+</div>
+@endif
 
     <div class="dz-product-preview">
         <div class="swiper product-detail-swiper-2">

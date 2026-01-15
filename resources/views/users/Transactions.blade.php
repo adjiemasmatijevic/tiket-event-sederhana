@@ -10,16 +10,17 @@
         <div class="col-12">
             <h2 class="h3 mb-1 text-primary">Transactions</h2>
             <p class="mb-3 text-dark">Manage your transactions here</p>
-            @if (session('success'))
-            <div class="mb-3 fs-3 alert alert-success">
-                {{ session('success') }}
-            </div>
-            @endif
-            @if (session('error'))
-            <div class="mb-3 fs-3 alert alert-danger">
-                {{ session('error') }}
-            </div>
-            @endif
+             @if (session('success'))
+<div id="toastSuccess" class="alert alert-success fs-5">
+    {{ session('success') }}
+</div>
+@endif
+
+@if (session('error'))
+<div id="toastError" class="alert alert-danger fs-5">
+    {{ session('error') }}
+</div>
+@endif
         </div>
     </div>
     <div class="row mt-2">

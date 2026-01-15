@@ -22,22 +22,22 @@ class VoucherController extends Controller
         $voucher = Voucher::where('voucher_code', $request->voucher_code)->first();
 
         if (! $voucher) {
-            return back()->with('error', 'Voucher tidak ditemukan');
+            return back()->with('error', 'Voucher not found');
         }
 
         if ($voucher->expired_at < now()) {
-            return back()->with('error', 'Voucher sudah expired');
+            return back()->with('error', 'The voucher has expired');
         }
 
         if ($voucher->limit <= 0) {
-            return back()->with('error', 'Voucher sudah habis');
+            return back()->with('error', 'Voucher has expired');
         }
         $alreadyClaimed = VoucherClaim::where('voucher_id', $voucher->id)
             ->where('user_id', $user->id)
             ->exists();
 
         if ($alreadyClaimed) {
-            return back()->with('error', 'Voucher sudah pernah digunakan');
+            return back()->with('error', 'Voucher has been used');
         }
         $cartItems = Cart::where('user_id', $user->id)
             ->where('status', 'available')
@@ -68,6 +68,6 @@ class VoucherController extends Controller
             'voucher_discount' => (int) $discount,
         ]);
 
-        return back()->with('success', 'Voucher berhasil digunakan');
+        return back()->with('success', 'Voucher successfully used');
     }
 }

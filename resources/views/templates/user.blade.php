@@ -209,6 +209,43 @@
             });
         });
     </script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    function showToast(el){
+        el.style.position = "fixed";
+        el.style.top = "-120px";
+        el.style.left = "50%";
+        el.style.transform = "translateX(-50%)"; // hanya center, bukan animasi
+        el.style.zIndex = "9999";
+        el.style.minWidth = "300px";
+el.style.width = "320px";
+el.style.textAlign = "center";
+
+        el.style.transition = "top 0.6s ease, opacity 0.6s ease";
+
+        setTimeout(() => {
+            el.style.top = "65px";
+            el.style.opacity = "1";
+        }, 50);
+
+        setTimeout(() => {
+            el.style.top = "-120px";
+            el.style.opacity = "0";
+        }, 3000);
+
+        setTimeout(() => {
+            el.remove();
+        }, 3700);
+    }
+
+    let success = document.getElementById("toastSuccess");
+    let error = document.getElementById("toastError");
+
+    if(success) showToast(success);
+    if(error) showToast(error);
+});
+</script>
 </body>
 
 </html>
